@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wave stickman -30
+  m_Controller: {fileID: 9100000, guid: 4caefe2e5eb50d44595213cd476fbef0, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3e26e3030f441d54a92b0507ce660f1e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3e26e3030f441d54a92b0507ce660f1e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 59d81393ef101734f985e4d7257395cc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e1a9cdf0acdd1fa4fbd897ba90ab6c0a, type: 2}
