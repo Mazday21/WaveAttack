@@ -32,6 +32,8 @@ public class ObjectPool : MonoBehaviour
     {
         gameObject.SetActive(false);
         gameObject.transform.position = _container.transform.position;
+        Collider collider = gameObject.GetComponent<Collider>();
+        collider.enabled = true;
         _pool.Enqueue(gameObject);
     }
 }

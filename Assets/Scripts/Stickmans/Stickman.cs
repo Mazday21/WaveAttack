@@ -29,11 +29,11 @@ public class Stickman : MonoBehaviour
 
         if (_coroutineAllowed)
         {
-            StartCoroutine(DelayAnimation());
+            StartCoroutine(DelayVanishing());
         }
     }
 
-    private IEnumerator DelayAnimation()
+    private IEnumerator DelayVanishing()
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToDisappear);

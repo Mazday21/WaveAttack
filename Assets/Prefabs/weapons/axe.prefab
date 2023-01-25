@@ -115,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5904f0be4614ffa408ed12ee1796349c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Rotation: {x: 0, y: 300, z: 0}
 --- !u!54 &1142338979
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -144,3 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd19587a802992c4b82a28978e851e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _secondsToVanishing: 1
+  _Rotation: {x: 0, y: 300, z: 0}

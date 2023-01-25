@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 7813935362469203406}
   - component: {fileID: 8709876358515473754}
   - component: {fileID: 36790072105779399}
+  - component: {fileID: 2230695936190040115}
   m_Layer: 0
   m_Name: Stickman_line
   m_TagString: Untagged
@@ -435,6 +436,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9e88a4e1a45124aba0fbd169162615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _secondsToDisappear: 3
+  IsAlive: 1
+--- !u!54 &2230695936190040115
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592553878796274958}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3798894917567851824
 GameObject:
   m_ObjectHideFlags: 0

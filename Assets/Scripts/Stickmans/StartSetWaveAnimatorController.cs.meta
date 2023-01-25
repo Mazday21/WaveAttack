@@ -3,7 +3,9 @@ guid: b61d5f50923efeb4bb25a00eaecfdace
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _rightFallController: {fileID: 22100000, guid: 1213e9507f975f4459ac7e19f6db7ab6, type: 2}
+  - _leftFallController: {fileID: 9100000, guid: 4caefe2e5eb50d44595213cd476fbef0, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

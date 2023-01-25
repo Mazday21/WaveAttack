@@ -27,11 +27,14 @@ public class WaveSpawner : StickmanSpawner
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);
+
         GetOrInstantiateGameObject(out GameObject waveStickman);
         int spawnPointNumber = Random.Range(0, _spawnPoints.Length);
         SetStickman(waveStickman, _spawnPoints[spawnPointNumber].position);
+
         Animator animator = waveStickman.GetComponent<Animator>();
         animator.Play(_hashAnimRun);
+
         yield return waitForSeconds;
         _coroutineAllowed = true;
     }
@@ -39,8 +42,6 @@ public class WaveSpawner : StickmanSpawner
     public override void ReturnGameObject(GameObject gameObject)
     {
         base.ReturnGameObject(gameObject);
-        Collider collider = gameObject.GetComponent<Collider>();
-        collider.enabled = true;
         gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 }

@@ -359,10 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b65f0003e0e32a4394fbcbb4e477c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2.5
   _secondsToDisappear: 3
-  _waveSpawner: {fileID: 0}
   IsAlive: 1
+  _speed: 2.5
 --- !u!136 &7955899993053234678
 CapsuleCollider:
   m_ObjectHideFlags: 0

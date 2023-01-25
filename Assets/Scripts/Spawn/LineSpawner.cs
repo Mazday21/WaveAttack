@@ -22,27 +22,28 @@ public class LineSpawner : StickmanSpawner
         }
     }
 
-    public void AddEmptyPoint(float positionZ)
+    public void AddEmptyPointZ(float positionZ)
     {
         for(int i = 0; i< _spawnPoints.Length; i++)
         {
             if(_emptySpawnPozitionsZ[i] == 0)
             {
                 _emptySpawnPozitionsZ[i] = positionZ;
+                break;
             }
         }
     }
 
     public void Spawn()
     {
-        foreach(Transform transform in _spawnPoints)
+        foreach(float positionZ in _emptySpawnPozitionsZ)
         {
-            for (int i = 0; i < _spawnPoints.Length; i++)
+            if (positionZ != 0)
             {
-                if (_emptySpawnPozitionsZ[i] != 0)
-                {
-                    transform.position.z = 
-                }
+                Vector3 spawnPosition = _spawnPoints[0].position;
+                spawnPosition.z = positionZ;
+                GetOrInstantiateGameObject(out GameObject lineStickman);
+                SetStickman(lineStickman, spawnPosition);
             }
         }
     }

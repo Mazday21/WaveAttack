@@ -6,22 +6,11 @@ public class StickmanWave : Stickman
 {
     [SerializeField] private float _speed;
 
-    public event UnityAction StickmanCollided;
-
     private void Update()
     {
         if(IsAlive)
         {
             Run();
-        }
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.TryGetComponent(out StickmanLine stickman))
-        {
-            stickman.Hit();
-            stickman.Death();
         }
     }
 
