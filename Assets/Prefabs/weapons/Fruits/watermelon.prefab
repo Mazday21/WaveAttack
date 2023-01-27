@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 33242410565983870}
   - component: {fileID: 23610094137429016}
   - component: {fileID: 1660885651785556345}
-  - component: {fileID: 3570846358189977342}
-  - component: {fileID: 1443519279}
   - component: {fileID: 422593185297034607}
+  - component: {fileID: 6305296299240622249}
   m_Layer: 6
   m_Name: watermelon
   m_TagString: Untagged
@@ -103,32 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &3570846358189977342
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125202155953082}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: 3f4d2118f6a772542a1635ef5bfa6982, type: 3}
---- !u!114 &1443519279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125202155953082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5904f0be4614ffa408ed12ee1796349c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &422593185297034607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +116,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _secondsToVanishing: 1
   _Rotation: {x: 0, y: 200, z: 0}
+--- !u!136 &6305296299240622249
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125202155953082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0054075806
+  m_Height: 0.01699583
+  m_Direction: 0
+  m_Center: {x: 0.0001944244, y: 0.0018769797, z: -0.0013885406}

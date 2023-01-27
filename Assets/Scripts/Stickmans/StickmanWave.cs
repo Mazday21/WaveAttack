@@ -6,6 +6,12 @@ public class StickmanWave : Stickman
 {
     [SerializeField] private float _speed;
 
+    private void Awake()
+    {
+        WaveSpawner spawner = transform.parent.gameObject.GetComponent<WaveSpawner>();
+        _spawner = spawner;
+    }
+
     private void Update()
     {
         if(IsAlive)

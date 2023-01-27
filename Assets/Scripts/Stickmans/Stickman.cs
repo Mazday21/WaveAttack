@@ -7,21 +7,15 @@ public class Stickman : MonoBehaviour
 {
     [SerializeField] private float _secondsToDisappear;
 
-    protected ObjectPool _spawner;
+    protected StickmanSpawner _spawner;
     protected Animator _animator;
     private readonly int _hashAnimDead = Animator.StringToHash("IsDead");
     private bool _coroutineAllowed = true;
     public bool IsAlive = true;
 
-    private void Awake()
-    {
-        ObjectPool spawner = transform.parent.gameObject.GetComponent<ObjectPool>();
-        _spawner = spawner;
-        _animator = GetComponent<Animator>();
-    }
-
     public void Hit()
     {
+        _animator = GetComponent<Animator>();
         _animator.SetBool(_hashAnimDead, true);
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;

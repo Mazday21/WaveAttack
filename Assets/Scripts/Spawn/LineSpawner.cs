@@ -9,6 +9,7 @@ public class LineSpawner : StickmanSpawner
     [SerializeField] private Transform[] _spawnPoints;
 
     private float[] _emptySpawnPozitionsZ;
+    private bool _coroutineAllowed = true;
 
     private void Start()
     {
@@ -20,6 +21,23 @@ public class LineSpawner : StickmanSpawner
             GetOrInstantiateGameObject(out GameObject lineStickman);
             SetStickman(lineStickman, i.position);
         }
+    }
+
+    private void Update()
+    {
+        if (_coroutineAllowed)
+        {
+            StartCoroutine(Delay());
+        }
+    }
+
+    private IEnumerator Delay()
+    {
+        _coroutineAllowed = false;
+        WaitForSeconds waitForSeconds = new WaitForSeconds(3);
+        Spawn();
+        yield return waitForSeconds;
+        _coroutineAllowed = true;
     }
 
     public void AddEmptyPointZ(float positionZ)
@@ -36,14 +54,16 @@ public class LineSpawner : StickmanSpawner
 
     public void Spawn()
     {
-        foreach(float positionZ in _emptySpawnPozitionsZ)
+        for(int i = 0;i < _emptySpawnPozitionsZ.Length; i++)
         {
-            if (positionZ != 0)
+            if (_emptySpawnPozitionsZ[i] != 0)
             {
                 Vector3 spawnPosition = _spawnPoints[0].position;
-                spawnPosition.z = positionZ;
+                spawnPosition.z = _emptySpawnPozitionsZ[i];
+                _emptySpawnPozitionsZ[i] = 0;
                 GetOrInstantiateGameObject(out GameObject lineStickman);
                 SetStickman(lineStickman, spawnPosition);
+                break;
             }
         }
     }

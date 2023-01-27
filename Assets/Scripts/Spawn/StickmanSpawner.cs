@@ -11,4 +11,11 @@ public class StickmanSpawner : ObjectPool
         stickman.IsAlive = true;
         Stickman.transform.position = spawnPoint;
     }
+
+    public override void ReturnGameObject(GameObject gameObject)
+    {
+        base.ReturnGameObject(gameObject);
+        Collider collider = gameObject.GetComponent<Collider>();
+        collider.enabled = true;
+    }
 }

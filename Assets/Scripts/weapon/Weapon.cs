@@ -7,14 +7,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _secondsToVanishing;
     [SerializeField] private Vector3 _Rotation;
 
-    private ObjectPool _spawner;
+    private WeaponSpawner _spawner;
     private bool _coroutineAllowed = true;
 
-    public bool Shutdown { get; private set; } = false;
+    private bool _isFallen = false;
 
     private void Awake()
     {
-        ObjectPool spawner = transform.parent.gameObject.GetComponent<WeaponSpawner>();
+        WeaponSpawner spawner = transform.parent.gameObject.GetComponent<WeaponSpawner>();
         _spawner = spawner;
     }
 
@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
 
     private void Rotate()
     {
-        if (!Shutdown)
+        if (!_isFallen)
         {
             transform.Rotate(_Rotation * Time.deltaTime);
         }
@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (!Shutdown)
+        if (!_isFallen)
         {
             if (col.TryGetComponent(out StickmanWave stickman))
             {
@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
         }
         if (col.TryGetComponent(out Track track))
         {
-            Shutdown = true;
+            _isFallen = true;
             if (_coroutineAllowed)
             {
                 StartCoroutine(DelayVanishing());
@@ -60,6 +60,7 @@ public class Weapon : MonoBehaviour
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToVanishing);
         yield return waitForSeconds;
         _spawner.ReturnGameObject(gameObject);
+        _isFallen = false;
         _coroutineAllowed = true;
     }
 }
