@@ -7,9 +7,9 @@ public class WeaponSpawner : ObjectPool
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwUpwardForce;
-    [SerializeField] private float _spreadY;
-    [SerializeField] private float _spreadZ;
-    [SerializeField] private int _power = 1;
+    [SerializeField] private float _maxSpreadY;
+    [SerializeField] private float _maxSpreadZ;
+    [Range(1, 20)][SerializeField] private int _power = 1;
 
     private bool _coroutineAllowed = true;
     private int _currentWeaponIndex;
@@ -96,8 +96,8 @@ public class WeaponSpawner : ObjectPool
     {
         Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
         Vector3 straightDirection = spawnPoint.transform.right * -1;
-        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - (_spreadZ / 2 + Random.Range(0.0f, _spreadZ))*_ratio).normalized;
-        float throwUpwardForce = _throwUpwardForce - (_spreadZ / 2 + Random.Range(0.0f, _spreadZ)) * _ratio;
+        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - (_maxSpreadZ / 2 - Random.Range(0.0f, _maxSpreadZ))*_ratio).normalized;
+        float throwUpwardForce = _throwUpwardForce - (_maxSpreadZ / 2 - Random.Range(0.0f, _maxSpreadZ)) * _ratio;
         Vector3 forceToAdd = forceDirection * _throwForce + transform.up * throwUpwardForce;
         Debug.Log("forceToAdd=" + forceToAdd);
         weaponRb.AddForce(forceToAdd, ForceMode.Impulse);
