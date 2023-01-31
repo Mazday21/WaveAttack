@@ -7,6 +7,16 @@ public class StickmanLine : Stickman
 {
     private readonly int _hashAnimThrow = Animator.StringToHash("Threw");
 
+    //public int Number
+    //{
+    //    get { return Number; }
+    //    set { if (value > 0 || value < 6)
+    //        {
+    //            Number = value;
+    //        }
+    //    }
+    //}
+
     private void Awake()
     {
         LineSpawner spawner = transform.parent.gameObject.GetComponent<LineSpawner>();
@@ -30,6 +40,6 @@ public class StickmanLine : Stickman
     public void PassEmptyPointZ()
     {
         LineSpawner lineSpawner = (LineSpawner)_spawner;
-        lineSpawner.AddEmptyPointZ(transform.position.z);
+        lineSpawner.AddEmptyPointZ((float)System.Math.Round(transform.position.z, 1));
     }
 }

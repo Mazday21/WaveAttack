@@ -20,12 +20,14 @@ public class LineSpawner : StickmanSpawner
         {
             GetOrInstantiateGameObject(out GameObject lineStickman);
             SetStickman(lineStickman, i.position);
+            
         }
         _spawnPoints = new SpawnPoint[_points.Length];
 
         for (int i = 0; i < _points.Length; i++)
         {
             _spawnPoints[i] = new SpawnPoint(_points[i], false);
+            Debug.Log("spawnPointsZ " + _points[i].position.z + " " + i);
         }
     }
 
@@ -48,12 +50,16 @@ public class LineSpawner : StickmanSpawner
 
     public void AddEmptyPointZ(float positionZ)
     {
-        for(int i = 0; i< _spawnPoints.Length; i++)
+        Debug.Log("AddEmptyPointZ " + positionZ);
+        Debug.Log("AddEmptyPointZ(Mathf.Round) " + positionZ);
+
+        for (int i = 0; i< _spawnPoints.Length; i++)
         {
-            if(!_spawnPoints[i].IsEnable)
+            if(_spawnPoints[i].Transform.position.z == positionZ)
             {
                 _spawnPoints[i].IsEnable = true;
-                _weaponSpawner.ChangeConditionSpawnPoint(positionZ);
+                _weaponSpawner.ChangeConditionSpawnPoint(positionZ, false);
+                Debug.Log("AddEmptyPointZ " + positionZ + " " + i);
                 break;
             }
         }
@@ -65,9 +71,11 @@ public class LineSpawner : StickmanSpawner
         {
             if (_spawnPoints[i].IsEnable)
             {
-                _weaponSpawner.ChangeConditionSpawnPoint(_spawnPoints[i].Transform.position.z);
+                _weaponSpawner.ChangeConditionSpawnPoint(_spawnPoints[i].Transform.position.z, true);
                 GetOrInstantiateGameObject(out GameObject lineStickman);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
+                _spawnPoints[i].IsEnable = false;
+                Debug.Log("Spawn Line " + _spawnPoints[i].Transform.position.z + " " + i);
                 break;
             }
         }

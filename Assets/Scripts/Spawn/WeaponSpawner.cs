@@ -16,6 +16,7 @@ public class WeaponSpawner : ObjectPool
     private int _currentWeaponIndex;
     private Vector3[] _quaternionWeapon;
     private SpawnPoint[] _spawnPoints;
+    private bool[] _isEnables;
 
     private void Start()
     {
@@ -52,7 +53,7 @@ public class WeaponSpawner : ObjectPool
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(3);
-        Spawn(3);
+        Spawn(1);
         yield return waitForSeconds;
         _coroutineAllowed = true;
     }
@@ -76,7 +77,7 @@ public class WeaponSpawner : ObjectPool
     {
         if (strength > 0 || strength < 20)
         {
-            for (int i = 0; i <= strength; i++)
+            for (int i = 1; i <= strength; i++)
             {
                 foreach (var spawnPoint in _spawnPoints)
                 {
@@ -108,13 +109,14 @@ public class WeaponSpawner : ObjectPool
         gameObject.transform.position = spawnPoint.transform.position;
     }
 
-    public void ChangeConditionSpawnPoint(float positionZ)
+    public void ChangeConditionSpawnPoint(float positionZ, bool condition)
     {
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
             if (_spawnPoints[i].Transform.position.z == positionZ)
             {
-                _spawnPoints[i].IsEnable = !_spawnPoints[i].IsEnable;
+                _spawnPoints[i].IsEnable = condition;
+                Debug.Log("ChangeCondition " + positionZ + " " + condition + " " + i);
                  break;
             }
         }

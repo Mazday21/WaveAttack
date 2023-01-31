@@ -25,7 +25,6 @@ public class ObjectPool : MonoBehaviour
 
     protected GameObject Instantiate(GameObject prefab)
     {
-        Debug.Log(prefab.transform.rotation.eulerAngles);
         return Instantiate(prefab, _container.transform);
     }
 
