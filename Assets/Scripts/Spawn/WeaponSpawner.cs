@@ -7,15 +7,16 @@ public class WeaponSpawner : ObjectPool
     [SerializeField] private Transform[] _points;
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwUpwardForce;
-    [SerializeField] private float _deltaThrowUpwardForce;
+    [SerializeField] private float _spreadY;
     [SerializeField] private float _spreadZ;
+    [SerializeField] private int _power = 1;
 
     private bool _coroutineAllowed = true;
-    private float _minThrowUpwardForce;
-    private float _maxThrowUpwardForce;
     private int _currentWeaponIndex;
     private Vector3[] _quaternionWeapon;
     private SpawnPoint[] _spawnPoints;
+    private float _ratio;
+    private int _maxPower = 20;
 
     private void Start()
     {
@@ -36,8 +37,6 @@ public class WeaponSpawner : ObjectPool
         }
 
         ChangeWeapon();
-        _minThrowUpwardForce = _throwUpwardForce - _deltaThrowUpwardForce / 2;
-        _maxThrowUpwardForce = _throwUpwardForce + _deltaThrowUpwardForce / 2;
     }
 
     private void Update()
@@ -52,7 +51,7 @@ public class WeaponSpawner : ObjectPool
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(3);
-        Spawn(1);
+        Spawn(_power);
         yield return waitForSeconds;
         _coroutineAllowed = true;
     }
@@ -72,11 +71,12 @@ public class WeaponSpawner : ObjectPool
         ChangeWeapon();
     }
 
-    public void Spawn(int strength)
+    public void Spawn(int power)
     {
-        if (strength > 0 || strength < 20)
+        if (power > 0 || power <= _maxPower)
         {
-            for (int i = 1; i <= strength; i++)
+            _ratio = power / _maxPower;
+            for (int i = 1; i <= power; i++)
             {
                 foreach (var spawnPoint in _spawnPoints)
                 {
@@ -89,14 +89,15 @@ public class WeaponSpawner : ObjectPool
                 }
             }
         }
+        else throw new System.ArgumentException("Wrong power " + power);
     }
 
     private void SetDirectionThrow(Transform spawnPoint, GameObject weapon)
     {
         Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
         Vector3 straightDirection = spawnPoint.transform.right * -1;
-        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - _spreadZ / 2 + Random.Range(0.0f, _spreadZ)).normalized;
-        float throwUpwardForce = Random.Range(_minThrowUpwardForce, _maxThrowUpwardForce);
+        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - (_spreadZ / 2 + Random.Range(0.0f, _spreadZ))*_ratio).normalized;
+        float throwUpwardForce = _throwUpwardForce - (_spreadZ / 2 + Random.Range(0.0f, _spreadZ)) * _ratio;
         Vector3 forceToAdd = forceDirection * _throwForce + transform.up * throwUpwardForce;
         Debug.Log("forceToAdd=" + forceToAdd);
         weaponRb.AddForce(forceToAdd, ForceMode.Impulse);
