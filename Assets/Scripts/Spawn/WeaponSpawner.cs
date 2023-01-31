@@ -16,7 +16,6 @@ public class WeaponSpawner : ObjectPool
     private int _currentWeaponIndex;
     private Vector3[] _quaternionWeapon;
     private SpawnPoint[] _spawnPoints;
-    private bool[] _isEnables;
 
     private void Start()
     {
@@ -99,6 +98,7 @@ public class WeaponSpawner : ObjectPool
         Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - _spreadZ / 2 + Random.Range(0.0f, _spreadZ)).normalized;
         float throwUpwardForce = Random.Range(_minThrowUpwardForce, _maxThrowUpwardForce);
         Vector3 forceToAdd = forceDirection * _throwForce + transform.up * throwUpwardForce;
+        Debug.Log("forceToAdd=" + forceToAdd);
         weaponRb.AddForce(forceToAdd, ForceMode.Impulse);
     }
 
@@ -107,6 +107,7 @@ public class WeaponSpawner : ObjectPool
         gameObject.SetActive(true);
         gameObject.transform.rotation = Quaternion.Euler(_quaternionWeapon[_currentWeaponIndex]);
         gameObject.transform.position = spawnPoint.transform.position;
+        Debug.Log("Euler=" + gameObject.transform.rotation);
     }
 
     public void ChangeConditionSpawnPoint(float positionZ, bool condition)
@@ -116,7 +117,6 @@ public class WeaponSpawner : ObjectPool
             if (_spawnPoints[i].Transform.position.z == positionZ)
             {
                 _spawnPoints[i].IsEnable = condition;
-                Debug.Log("ChangeCondition " + positionZ + " " + condition + " " + i);
                  break;
             }
         }

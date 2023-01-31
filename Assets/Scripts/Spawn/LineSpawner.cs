@@ -27,7 +27,6 @@ public class LineSpawner : StickmanSpawner
         for (int i = 0; i < _points.Length; i++)
         {
             _spawnPoints[i] = new SpawnPoint(_points[i], false);
-            Debug.Log("spawnPointsZ " + _points[i].position.z + " " + i);
         }
     }
 
@@ -42,7 +41,7 @@ public class LineSpawner : StickmanSpawner
     private IEnumerator Delay()
     {
         _coroutineAllowed = false;
-        WaitForSeconds waitForSeconds = new WaitForSeconds(10);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(3);
         Spawn();
         yield return waitForSeconds;
         _coroutineAllowed = true;
@@ -50,16 +49,12 @@ public class LineSpawner : StickmanSpawner
 
     public void AddEmptyPointZ(float positionZ)
     {
-        Debug.Log("AddEmptyPointZ " + positionZ);
-        Debug.Log("AddEmptyPointZ(Mathf.Round) " + positionZ);
-
         for (int i = 0; i< _spawnPoints.Length; i++)
         {
             if(_spawnPoints[i].Transform.position.z == positionZ)
             {
                 _spawnPoints[i].IsEnable = true;
                 _weaponSpawner.ChangeConditionSpawnPoint(positionZ, false);
-                Debug.Log("AddEmptyPointZ " + positionZ + " " + i);
                 break;
             }
         }
@@ -75,7 +70,6 @@ public class LineSpawner : StickmanSpawner
                 GetOrInstantiateGameObject(out GameObject lineStickman);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
                 _spawnPoints[i].IsEnable = false;
-                Debug.Log("Spawn Line " + _spawnPoints[i].Transform.position.z + " " + i);
                 break;
             }
         }

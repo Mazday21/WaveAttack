@@ -7,7 +7,7 @@ public class WaveSpawner : StickmanSpawner
     [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private Transform[] _spawnPoints;
 
-    private bool _coroutineAllowed = true;
+    private bool _coroutineAllowed = false;
     private readonly int _hashAnimRun = Animator.StringToHash("Run");
 
     private void Start()
