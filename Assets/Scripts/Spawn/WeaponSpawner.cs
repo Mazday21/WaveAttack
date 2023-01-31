@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class WeaponSpawner : ObjectPool
 {
     [SerializeField] private Weapon[] _weapons;
-    //[SerializeField] private List<Weapon> _weapons;
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private Transform[] _points;
     [SerializeField] private float _throwForce;
     [SerializeField] private float _throwUpwardForce;
     [SerializeField] private float _deltaThrowUpwardForce;
@@ -16,22 +13,31 @@ public class WeaponSpawner : ObjectPool
     private bool _coroutineAllowed = true;
     private float _minThrowUpwardForce;
     private float _maxThrowUpwardForce;
-    private Weapon _currentWeapon;
-    private Quaternion[] _quaternionsWeapon;
+    private int _currentWeaponIndex;
+    private Vector3[] _quaternionWeapon;
+    private SpawnPoint[] _spawnPoints;
 
     private void Start()
     {
-        _quaternionsWeapon = new Quaternion[_weapons.Length];
-        ChangeWeapon(_weapons[3]);
-        _minThrowUpwardForce = _throwUpwardForce - _deltaThrowUpwardForce / 2;
-        _maxThrowUpwardForce = _throwUpwardForce + _deltaThrowUpwardForce / 2;
+        _currentWeaponIndex = 3;
+        _spawnPoints = new SpawnPoint[_points.Length];
+
+        for(int i = 0; i < _points.Length; i++)
+        {
+            _spawnPoints[i] = new SpawnPoint(_points[i], true);
+        }
+
+        _quaternionWeapon = new Vector3[_weapons.Length];
 
         for (int i = 0; i < _weapons.Length; i++)
         {
-            _quaternionsWeapon[i] = _weapons[i].transform.rotation;
-            Debug.Log(_weapons[i].transform.rotation.x + " " + _weapons[i].transform.rotation.y + " " + _weapons[i].transform.rotation.z);
-            Debug.Log("---   ---");
+            Transform transform = _weapons[i].GetComponent<Transform>();
+            _quaternionWeapon[i] = transform.rotation.eulerAngles;
         }
+
+        ChangeWeapon();
+        _minThrowUpwardForce = _throwUpwardForce - _deltaThrowUpwardForce / 2;
+        _maxThrowUpwardForce = _throwUpwardForce + _deltaThrowUpwardForce / 2;
     }
 
     private void Update()
@@ -51,53 +57,78 @@ public class WeaponSpawner : ObjectPool
         _coroutineAllowed = true;
     }
 
-    private void ChangeWeapon(Weapon weapon)
+    private void ChangeWeapon()
     {
-        _currentWeapon = weapon;
-        Initialize(_currentWeapon.gameObject);
+        Initialize(_weapons[_currentWeaponIndex].gameObject);
+    }
+
+    public void ChangeWeaponIndex(int index)
+    {
+        if (index < 0 || index >= _weapons.Length)
+        {
+            throw new System.ArgumentException(index + " goes beyond");
+        }
+        _currentWeaponIndex = index;
+        ChangeWeapon();
     }
 
     public void Spawn(int strength)
     {
-        if(strength > 0 || strength < 20)
+        if (strength > 0 || strength < 20)
         {
-            for(int i = 0; i <= strength; i++)
+            for (int i = 0; i <= strength; i++)
             {
                 foreach (var spawnPoint in _spawnPoints)
                 {
-                    GetOrInstantiateGameObject(out GameObject weapon);
-                    weapon.SetActive(true);
-                    weapon.transform.position = spawnPoint.transform.position;
-                    Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
-                    Vector3 straightDirection = spawnPoint.transform.right * -1;
-                    Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - _spreadZ / 2 + Random.Range(0.0f, _spreadZ)).normalized;
-                    float throwUpwardForce = Random.Range(_minThrowUpwardForce, _maxThrowUpwardForce);
-                    Vector3 forceToAdd = forceDirection * _throwForce + transform.up * throwUpwardForce;
-                    weaponRb.AddForce(forceToAdd, ForceMode.Impulse);
+                    if (spawnPoint.IsEnable)
+                    {
+                        GetOrInstantiateGameObject(out GameObject weapon);
+                        SetWeapon(spawnPoint.Transform, weapon);
+                        SetDirectionThrow(spawnPoint.Transform, weapon);
+                    }
                 }
             }
         }
     }
 
-    public override void ReturnGameObject(GameObject gameObject)
+    private void SetDirectionThrow(Transform spawnPoint, GameObject weapon)
     {
-        base.ReturnGameObject(gameObject);
-        Weapon weapon = gameObject.GetComponent<Weapon>();
+        Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
+        Vector3 straightDirection = spawnPoint.transform.right * -1;
+        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - _spreadZ / 2 + Random.Range(0.0f, _spreadZ)).normalized;
+        float throwUpwardForce = Random.Range(_minThrowUpwardForce, _maxThrowUpwardForce);
+        Vector3 forceToAdd = forceDirection * _throwForce + transform.up * throwUpwardForce;
+        weaponRb.AddForce(forceToAdd, ForceMode.Impulse);
+    }
 
-        for (int i = 0; i < _weapons.Length; i++)
+    private void SetWeapon(Transform spawnPoint, GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+        gameObject.transform.rotation = Quaternion.Euler(_quaternionWeapon[_currentWeaponIndex]);
+        gameObject.transform.position = spawnPoint.transform.position;
+    }
+
+    public void ChangeConditionSpawnPoint(float positionZ)
+    {
+        for (int i = 0; i < _spawnPoints.Length; i++)
         {
-            if (_weapons[i] == weapon)
+            if (_spawnPoints[i].Transform.position.z == positionZ)
             {
-                gameObject.transform.rotation = _quaternionsWeapon[i];
-                break;
+                _spawnPoints[i].IsEnable = !_spawnPoints[i].IsEnable;
+                 break;
             }
         }
     }
-    //public override void ReturnGameObject(GameObject gameObject)
-    //{
-    //    base.ReturnGameObject(gameObject);
-    //    Weapon weapon = gameObject.GetComponent<Weapon>();
-    //    Weapon weaponToReturn = _weapons.First(w => w == weapon);
-    //    gameObject.transform.rotation = weaponToReturn.transform.rotation;
-    //}
+
+struct SpawnPoint
+    {
+        public Transform Transform;
+        public bool IsEnable;
+
+        public SpawnPoint(Transform transform, bool isEnable)
+        {
+            this.Transform = transform;
+            this.IsEnable = isEnable;
+        }
+    }
 }

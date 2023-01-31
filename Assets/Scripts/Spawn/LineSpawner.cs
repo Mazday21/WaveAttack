@@ -6,20 +6,26 @@ using UnityEngine.UIElements;
 public class LineSpawner : StickmanSpawner
 {
     [SerializeField] private StickmanLine _linePrefab;
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private Transform[] _points;
+    [SerializeField] private WeaponSpawner _weaponSpawner;
 
-    private float[] _emptySpawnPozitionsZ;
     private bool _coroutineAllowed = true;
+    private SpawnPoint[] _spawnPoints;
 
     private void Start()
     {
-        _emptySpawnPozitionsZ = new float[_spawnPoints.Length];
         Initialize(_linePrefab.gameObject);
 
-        foreach(Transform i in _spawnPoints)
+        foreach(Transform i in _points)
         {
             GetOrInstantiateGameObject(out GameObject lineStickman);
             SetStickman(lineStickman, i.position);
+        }
+        _spawnPoints = new SpawnPoint[_points.Length];
+
+        for (int i = 0; i < _points.Length; i++)
+        {
+            _spawnPoints[i] = new SpawnPoint(_points[i], false);
         }
     }
 
@@ -34,7 +40,7 @@ public class LineSpawner : StickmanSpawner
     private IEnumerator Delay()
     {
         _coroutineAllowed = false;
-        WaitForSeconds waitForSeconds = new WaitForSeconds(3);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(10);
         Spawn();
         yield return waitForSeconds;
         _coroutineAllowed = true;
@@ -44,9 +50,10 @@ public class LineSpawner : StickmanSpawner
     {
         for(int i = 0; i< _spawnPoints.Length; i++)
         {
-            if(_emptySpawnPozitionsZ[i] == 0)
+            if(!_spawnPoints[i].IsEnable)
             {
-                _emptySpawnPozitionsZ[i] = positionZ;
+                _spawnPoints[i].IsEnable = true;
+                _weaponSpawner.ChangeConditionSpawnPoint(positionZ);
                 break;
             }
         }
@@ -54,17 +61,28 @@ public class LineSpawner : StickmanSpawner
 
     public void Spawn()
     {
-        for(int i = 0;i < _emptySpawnPozitionsZ.Length; i++)
+        for(int i = 0;i < _spawnPoints.Length; i++)
         {
-            if (_emptySpawnPozitionsZ[i] != 0)
+            if (_spawnPoints[i].IsEnable)
             {
-                Vector3 spawnPosition = _spawnPoints[0].position;
-                spawnPosition.z = _emptySpawnPozitionsZ[i];
-                _emptySpawnPozitionsZ[i] = 0;
+                _weaponSpawner.ChangeConditionSpawnPoint(_spawnPoints[i].Transform.position.z);
                 GetOrInstantiateGameObject(out GameObject lineStickman);
-                SetStickman(lineStickman, spawnPosition);
+                SetStickman(lineStickman, _spawnPoints[i].Transform.position);
                 break;
             }
         }
     }
+
+    struct SpawnPoint
+    {
+        public Transform Transform;
+        public bool IsEnable;
+
+        public SpawnPoint(Transform transform, bool isEnable)
+        {
+            this.Transform = transform;
+            this.IsEnable = isEnable;
+        }
+    }
 }
+
