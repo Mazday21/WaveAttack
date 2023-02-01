@@ -28,16 +28,18 @@ public class WaveSpawner : StickmanSpawner
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);
+        SpawnSet();
+        yield return waitForSeconds;
+        _coroutineAllowed = true;
+    }
 
+    private void SpawnSet()
+    {
         GetOrInstantiateGameObject(out GameObject waveStickman);
         int spawnPointNumber = Random.Range(0, _spawnPoints.Length);
         SetStickman(waveStickman, _spawnPoints[spawnPointNumber].position);
-
         Animator animator = waveStickman.GetComponent<Animator>();
         animator.Play(_hashAnimRun);
-
-        yield return waitForSeconds;
-        _coroutineAllowed = true;
     }
 
     public override void ReturnGameObject(GameObject gameObject)
