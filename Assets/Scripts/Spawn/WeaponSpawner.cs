@@ -9,18 +9,19 @@ public class WeaponSpawner : ObjectPool
     [SerializeField] private float _throwUpwardForce;
     [SerializeField] private float _maxSpreadY;
     [SerializeField] private float _maxSpreadZ;
-    [Range(1, 20)][SerializeField] private int _power = 1;
+    [Range(_minPower, _maxPower)][SerializeField] private int _power;
+    [SerializeField] private int _currentWeaponIndex;
+    [SerializeField] private float _secondsBetweenSpawn;
 
     private bool _coroutineAllowed = true;
-    private int _currentWeaponIndex;
     private Vector3[] _quaternionWeapon;
     private SpawnPoint[] _spawnPoints;
     private float _ratio;
-    private int _maxPower = 20;
+    private const int _maxPower = 20;
+    private const int _minPower = 6;
 
     private void Start()
     {
-        _currentWeaponIndex = 3;
         _spawnPoints = new SpawnPoint[_points.Length];
 
         for(int i = 0; i < _points.Length; i++)
@@ -50,7 +51,7 @@ public class WeaponSpawner : ObjectPool
     private IEnumerator Delay()
     {
         _coroutineAllowed = false;
-        WaitForSeconds waitForSeconds = new WaitForSeconds(3);
+        WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);
         Spawn(_power);
         yield return waitForSeconds;
         _coroutineAllowed = true;
@@ -75,7 +76,7 @@ public class WeaponSpawner : ObjectPool
     {
         if (power > 0 || power <= _maxPower)
         {
-            _ratio = power / _maxPower;
+            _ratio = power / (float)_maxPower;
             for (int i = 1; i <= power; i++)
             {
                 foreach (var spawnPoint in _spawnPoints)
@@ -96,10 +97,9 @@ public class WeaponSpawner : ObjectPool
     {
         Rigidbody weaponRb = weapon.GetComponent<Rigidbody>();
         Vector3 straightDirection = spawnPoint.transform.right * -1;
-        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y, straightDirection.z - (_maxSpreadZ / 2 - Random.Range(0.0f, _maxSpreadZ))*_ratio).normalized;
-        float throwUpwardForce = _throwUpwardForce - (_maxSpreadZ / 2 - Random.Range(0.0f, _maxSpreadZ)) * _ratio;
-        Vector3 forceToAdd = forceDirection * _throwForce + transform.up * throwUpwardForce;
-        Debug.Log("forceToAdd=" + forceToAdd);
+        float spreadY = (_maxSpreadY / 2 - Random.Range(0.0f, _maxSpreadY)) * _ratio;
+        Vector3 forceDirection = new Vector3(straightDirection.x, straightDirection.y - spreadY, straightDirection.z - (_maxSpreadZ / 2 - Random.Range(0.0f, _maxSpreadZ))*_ratio).normalized;
+        Vector3 forceToAdd = forceDirection * _throwForce + transform.up * _throwUpwardForce;
         weaponRb.AddForce(forceToAdd, ForceMode.Impulse);
     }
 
@@ -108,7 +108,6 @@ public class WeaponSpawner : ObjectPool
         gameObject.SetActive(true);
         gameObject.transform.rotation = Quaternion.Euler(_quaternionWeapon[_currentWeaponIndex]);
         gameObject.transform.position = spawnPoint.transform.position;
-        Debug.Log("Euler=" + gameObject.transform.rotation);
     }
 
     public void ChangeConditionSpawnPoint(float positionZ, bool condition)

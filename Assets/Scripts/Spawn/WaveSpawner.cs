@@ -7,7 +7,7 @@ public class WaveSpawner : StickmanSpawner
     [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private Transform[] _spawnPoints;
 
-    private bool _coroutineAllowed = false;
+    protected bool _coroutineAllowed = true;
     private readonly int _hashAnimRun = Animator.StringToHash("Run");
 
     private void Start()
@@ -19,11 +19,12 @@ public class WaveSpawner : StickmanSpawner
     {
         if (_coroutineAllowed)
         {
+            Debug.Log("small");
             StartCoroutine(DelayAppearance());
         }
     }
 
-    private IEnumerator DelayAppearance()
+    protected IEnumerator DelayAppearance()
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);
