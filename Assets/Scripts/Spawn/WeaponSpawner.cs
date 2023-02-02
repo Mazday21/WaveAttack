@@ -25,6 +25,7 @@ public class WeaponSpawner : ObjectPool
     private void Awake()
     {
         InitializePool(Pool);
+        ChangeWeapon();
     }
 
     private void Start()
@@ -44,7 +45,6 @@ public class WeaponSpawner : ObjectPool
             _quaternionWeapon[i] = transform.rotation.eulerAngles;
         }
 
-        ChangeWeapon();
     }
 
     private void Update()

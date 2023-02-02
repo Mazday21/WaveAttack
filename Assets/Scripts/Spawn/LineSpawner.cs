@@ -16,11 +16,11 @@ public class LineSpawner : StickmanSpawner
     private void Awake()
     {
         InitializePool(_pool);
+        InitializePrefab(_linePrefab.gameObject);
     }
 
     private void Start()
     {
-        InitializePrefab(_linePrefab.gameObject);
 
         foreach(Transform i in _points)
         {

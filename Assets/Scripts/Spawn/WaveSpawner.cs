@@ -15,10 +15,6 @@ public class WaveSpawner : StickmanSpawner
     private void Awake()
     {
         InitializePool(_pool);
-    }
-
-    private void Start()
-    {
         InitializePrefab(_wavePrefab.gameObject);
     }
 
