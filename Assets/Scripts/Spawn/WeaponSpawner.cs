@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponSpawner : ObjectPool
@@ -19,6 +20,13 @@ public class WeaponSpawner : ObjectPool
     private float _ratio;
     private const int _maxPower = 20;
     private const int _minPower = 6;
+
+    public Queue<GameObject> Pool;
+
+    private void Awake()
+    {
+        InitializePool(Pool);
+    }
 
     private void Start()
     {
@@ -59,7 +67,7 @@ public class WeaponSpawner : ObjectPool
 
     private void ChangeWeapon()
     {
-        Initialize(_weapons[_currentWeaponIndex].gameObject);
+        InitializePrefab(_weapons[_currentWeaponIndex].gameObject);
     }
 
     public void ChangeWeaponIndex(int index)
@@ -83,7 +91,7 @@ public class WeaponSpawner : ObjectPool
                 {
                     if (spawnPoint.IsEnable)
                     {
-                        GetOrInstantiateGameObject(out GameObject weapon);
+                        GetOrInstantiateGameObject(out GameObject weapon, Pool);
                         SetWeapon(spawnPoint.Transform, weapon);
                         SetDirectionThrow(spawnPoint.Transform, weapon);
                     }
@@ -122,7 +130,12 @@ public class WeaponSpawner : ObjectPool
         }
     }
 
-struct SpawnPoint
+    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
+    {
+        base.ReturnGameObject(gameObject, Pool);
+    }
+
+    struct SpawnPoint
     {
         public Transform Transform;
         public bool IsEnable;

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class StickmanSpawner : ObjectPool
 {
+    public Queue<GameObject> Pool;
+
+    private void Awake()
+    {
+        InitializePool(Pool);
+    }
+
     protected void SetStickman(GameObject Stickman, Vector3 spawnPoint)
     {
         Stickman.SetActive(true);
@@ -12,9 +19,9 @@ public class StickmanSpawner : ObjectPool
         Stickman.transform.position = spawnPoint;
     }
 
-    public override void ReturnGameObject(GameObject gameObject)
+    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
     {
-        base.ReturnGameObject(gameObject);
+        base.ReturnGameObject(gameObject, Pool);
         Collider collider = gameObject.GetComponent<Collider>();
         collider.enabled = true;
     }

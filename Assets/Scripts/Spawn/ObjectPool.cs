@@ -6,18 +6,28 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private Transform _container;
 
     private GameObject _prefab;
-    private Queue<GameObject> _pool = new Queue<GameObject>();
+    private Queue<GameObject> Pool;
 
-    protected void Initialize(GameObject prefab)
+    private void Awake()
     {
-        GameObject spawned = Instantiate(prefab);
-        _pool.Enqueue(spawned);
-        _prefab = prefab;
+        InitializePool(Pool);
     }
 
-    protected void GetOrInstantiateGameObject(out GameObject result)
+    protected void InitializePrefab(GameObject prefab)
     {
-        if (!_pool.TryDequeue(out result))
+        GameObject spawned = Instantiate(prefab);
+        Pool.Enqueue(spawned);
+        _prefab = prefab;
+    }
+    
+    protected void InitializePool<T>(Queue<T> Pool)
+    {
+        Pool = new Queue<T>();
+    }
+
+    protected void GetOrInstantiateGameObject(out GameObject result, Queue<GameObject> pool)
+    {
+        if (!pool.TryDequeue(out result))
         {
             result = Instantiate(_prefab);
         }
@@ -28,10 +38,10 @@ public class ObjectPool : MonoBehaviour
         return Instantiate(prefab, _container.transform);
     }
 
-    public virtual void ReturnGameObject(GameObject gameObject)
+    public virtual void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
     {
         gameObject.SetActive(false);
         gameObject.transform.position = _container.transform.position;
-        _pool.Enqueue(gameObject);
+        pool.Enqueue(gameObject);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -59,7 +60,7 @@ public class Weapon : MonoBehaviour
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToVanishing);
         yield return waitForSeconds;
-        _spawner.ReturnGameObject(gameObject);
+        _spawner.ReturnGameObject(gameObject, _spawner.Pool);
         _isFallen = false;
         _coroutineAllowed = true;
     }

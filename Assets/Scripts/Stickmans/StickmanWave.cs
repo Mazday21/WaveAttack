@@ -9,7 +9,7 @@ public class StickmanWave : Stickman
     private void Awake()
     {
         WaveSpawner spawner = transform.parent.gameObject.GetComponent<WaveSpawner>();
-        _spawner = spawner;
+        Spawner = spawner;
     }
 
     private void Update()

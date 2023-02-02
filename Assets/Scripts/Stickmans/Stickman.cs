@@ -7,16 +7,16 @@ public class Stickman : MonoBehaviour
 {
     [SerializeField] private float _secondsToDisappear;
 
-    protected StickmanSpawner _spawner;
-    protected Animator _animator;
+    protected StickmanSpawner Spawner;
+    protected Animator Animator;
     private readonly int _hashAnimDead = Animator.StringToHash("IsDead");
     private bool _coroutineAllowed = true;
     public bool IsAlive = true;
 
     public void Hit()
     {
-        _animator = GetComponent<Animator>();
-        _animator.SetBool(_hashAnimDead, true);
+        Animator = GetComponent<Animator>();
+        Animator.SetBool(_hashAnimDead, true);
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;
         IsAlive = false;
@@ -32,7 +32,7 @@ public class Stickman : MonoBehaviour
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToDisappear);
         yield return waitForSeconds;
-        _spawner.ReturnGameObject(gameObject);
+        Spawner.ReturnGameObject(gameObject, Spawner.Pool);
         _coroutineAllowed = true;
     }
 }

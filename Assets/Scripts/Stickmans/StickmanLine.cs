@@ -10,7 +10,7 @@ public class StickmanLine : Stickman
     private void Awake()
     {
         LineSpawner spawner = transform.parent.gameObject.GetComponent<LineSpawner>();
-        _spawner = spawner;
+        Spawner = spawner;
     }
 
     private void OnTriggerEnter(Collider col)
@@ -24,12 +24,12 @@ public class StickmanLine : Stickman
 
     public void Throw()
     {
-        _animator.SetTrigger(_hashAnimThrow);
+        Animator.SetTrigger(_hashAnimThrow);
     }
 
     public void PassEmptyPointZ()
     {
-        LineSpawner lineSpawner = (LineSpawner)_spawner;
+        LineSpawner lineSpawner = (LineSpawner)Spawner;
         lineSpawner.AddEmptyPointZ((float)System.Math.Round(transform.position.z, 1));
     }
 }

@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class BigWaveSpawner : WaveSpawner
 {
-    private void Update()
+    private void Awake()
     {
-        if (_coroutineAllowed)
-        {
-            Debug.Log("big");
-            StartCoroutine(DelayAppearance());
-        }
+        InitializePool(Pool);
     }
 }
