@@ -20,7 +20,6 @@ public class WeaponSpawner : ObjectPool
     private float _ratio;
     private const int _maxPower = 20;
     private const int _minPower = 6;
-
     public Queue<GameObject> Pool;
 
     private void Awake()

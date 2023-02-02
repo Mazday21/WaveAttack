@@ -10,10 +10,11 @@ public class WaveSpawner : StickmanSpawner
 
     protected bool _coroutineAllowed = true;
     private readonly int _hashAnimRun = Animator.StringToHash("Run");
+    private Queue<GameObject> _pool;
 
     private void Awake()
     {
-        InitializePool(Pool);
+        InitializePool(_pool);
     }
 
     private void Start()
@@ -42,7 +43,7 @@ public class WaveSpawner : StickmanSpawner
     {
         foreach(Transform t in _spawnPoints)
         {
-            GetOrInstantiateGameObject(out GameObject waveStickman, Pool);
+            GetOrInstantiateGameObject(out GameObject waveStickman, _pool);
             SetStickman(waveStickman, t.position);
             Animator animator = waveStickman.GetComponent<Animator>();
             animator.Play(_hashAnimRun);

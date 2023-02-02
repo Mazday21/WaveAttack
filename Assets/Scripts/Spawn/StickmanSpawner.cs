@@ -21,7 +21,7 @@ public class StickmanSpawner : ObjectPool
 
     public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
     {
-        base.ReturnGameObject(gameObject, Pool);
+        base.ReturnGameObject(gameObject, pool);
         Collider collider = gameObject.GetComponent<Collider>();
         collider.enabled = true;
     }
