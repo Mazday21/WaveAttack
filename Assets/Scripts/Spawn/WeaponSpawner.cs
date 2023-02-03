@@ -24,7 +24,7 @@ public class WeaponSpawner : ObjectPool
 
     private void Awake()
     {
-        InitializePool(Pool);
+        Pool = InitializePool(Pool);
         ChangeWeapon();
     }
 

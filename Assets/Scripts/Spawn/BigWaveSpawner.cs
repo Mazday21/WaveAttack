@@ -8,6 +8,6 @@ public class BigWaveSpawner : WaveSpawner
 
     private void Awake()
     {
-        InitializePool(_pool);
+        _pool = InitializePool(_pool);
     }
 }

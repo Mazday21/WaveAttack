@@ -16,14 +16,13 @@ public class ObjectPool : MonoBehaviour
     protected void InitializePrefab(GameObject prefab, Queue<GameObject> pool)
     {
         GameObject spawned = Instantiate(prefab);
-        Debug.Log(pool.Count);
         pool.Enqueue(spawned.gameObject);
         _prefab = prefab;
     }
     
-    protected void InitializePool(Queue<GameObject> Pool)
+    protected Queue<GameObject> InitializePool(Queue<GameObject> pool)
     {
-        Pool = new Queue<GameObject>();
+        return new Queue<GameObject>();
     }
 
     protected void GetOrInstantiateGameObject(out GameObject result, Queue<GameObject> pool)

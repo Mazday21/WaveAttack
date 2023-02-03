@@ -15,7 +15,7 @@ public class LineSpawner : StickmanSpawner
 
     private void Awake()
     {
-        InitializePool(_pool);
+        _pool = InitializePool(_pool);
         InitializePrefab(_linePrefab.gameObject, _pool);
     }
 
