@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BigWaveSpawner : WaveSpawner
 {
-    private Queue<BigStickmanWave> _pool;
+    private Queue<GameObject> _pool;
 
     private void Awake()
     {

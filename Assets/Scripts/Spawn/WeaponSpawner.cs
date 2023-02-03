@@ -66,7 +66,7 @@ public class WeaponSpawner : ObjectPool
 
     private void ChangeWeapon()
     {
-        InitializePrefab(_weapons[_currentWeaponIndex].gameObject);
+        InitializePrefab(_weapons[_currentWeaponIndex].gameObject, Pool);
     }
 
     public void ChangeWeaponIndex(int index)
@@ -127,11 +127,6 @@ public class WeaponSpawner : ObjectPool
                  break;
             }
         }
-    }
-
-    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
-    {
-        base.ReturnGameObject(gameObject, Pool);
     }
 
     struct SpawnPoint
