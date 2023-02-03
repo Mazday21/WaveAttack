@@ -81,6 +81,11 @@ public class LineSpawner : StickmanSpawner
         }
     }
 
+    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
+    {
+        base.ReturnGameObject(gameObject, Pool);
+    }
+
     struct SpawnPoint
     {
         public Transform Transform;

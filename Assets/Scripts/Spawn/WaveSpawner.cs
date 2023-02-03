@@ -48,7 +48,7 @@ public class WaveSpawner : StickmanSpawner
 
     public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
     {
-        base.ReturnGameObject(gameObject, pool);
+        base.ReturnGameObject(gameObject, Pool);
         gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 }

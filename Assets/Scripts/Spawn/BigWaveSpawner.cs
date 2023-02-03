@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class BigWaveSpawner : WaveSpawner
 {
-    private Queue<GameObject> _pool;
+    public Queue<GameObject> Pool;
 
     private void Awake()
     {
-        _pool = InitializePool(_pool);
+        Pool = InitializePool(Pool);
+    }
+
+    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
+    {
+        base.ReturnGameObject(gameObject, Pool);
     }
 }
