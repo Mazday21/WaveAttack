@@ -2,15 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class StickmanWave : Stickman
+public class Enemy : Stickman
 {
     [SerializeField] private float _speed;
-
-    private void Awake()
-    {
-        WaveSpawner spawner = transform.parent.gameObject.GetComponent<WaveSpawner>();
-        Spawner = spawner;
-    }
 
     private void Update()
     {

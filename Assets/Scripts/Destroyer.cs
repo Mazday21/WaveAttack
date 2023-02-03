@@ -6,7 +6,7 @@ public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter(Collider col)
     {
-        if (col.TryGetComponent(out StickmanWave stickman))
+        if (col.TryGetComponent(out Enemy stickman))
         {
             stickman.Hit();
         }

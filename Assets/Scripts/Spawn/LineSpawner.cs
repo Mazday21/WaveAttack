@@ -11,20 +11,13 @@ public class LineSpawner : StickmanSpawner
 
     private bool _coroutineAllowed = true;
     private SpawnPoint[] _spawnPoints;
-    private Queue<GameObject> _pool;
-
-    private void Awake()
-    {
-        InitializePool(_pool);
-        InitializePrefab(_linePrefab.gameObject, _pool);
-    }
 
     private void Start()
     {
 
         foreach(Transform i in _points)
         {
-            GetOrInstantiateGameObject(out GameObject lineStickman, _pool);
+            Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
             SetStickman(lineStickman, i.position);
             
         }
@@ -73,17 +66,12 @@ public class LineSpawner : StickmanSpawner
             if (_spawnPoints[i].IsEnable)
             {
                 _weaponSpawner.ChangeConditionSpawnPoint(_spawnPoints[i].Transform.position.z, true);
-                GetOrInstantiateGameObject(out GameObject lineStickman, _pool);
+                Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
                 _spawnPoints[i].IsEnable = false;
                 break;
             }
         }
-    }
-
-    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
-    {
-        base.ReturnGameObject(gameObject, Pool);
     }
 
     struct SpawnPoint

@@ -975,7 +975,11 @@ Transform:
   m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2012366524}
+  - {fileID: 1576004712}
+  - {fileID: 1500035980}
+  - {fileID: 1724243959}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -991,7 +995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882e299ab24a40240a4574a800a5e938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 866570867}
+  Pool: {fileID: 1724243958}
   _linePrefab: {fileID: 36790072105779399, guid: 419258ba81e77144cb2c79a1d8ccd880, type: 3}
   _points:
   - {fileID: 162980042}
@@ -1013,9 +1017,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f097df3c00ab0464185ffc7d7c8b9482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 866570867}
-  _wavePrefab: {fileID: 527202237, guid: 1f0235100b661e944ad85f54e7570030, type: 3}
-  _secondsBetweenSpawn: 0.5
+  Pool: {fileID: 1576004711}
+  _enemyPrefab: {fileID: 0}
+  _secondsBetweenSpawn: 3
   _spawnPoints:
   - {fileID: 16224693}
   - {fileID: 1706635198}
@@ -1035,7 +1039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3541a280322fa9847bddbb92ff30af1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 866570867}
   _weapons:
   - {fileID: 1984512798009787165, guid: 20c16818d27ca4447894d9fe379ff926, type: 3}
   - {fileID: 3358139713662749349, guid: 6361bd989f5288f45ac7c285e6520b1c, type: 3}
@@ -1049,12 +1052,13 @@ MonoBehaviour:
   - {fileID: 191931459}
   - {fileID: 1227800301}
   _throwForce: 15
-  _throwUpwardForce: 2
+  _throwUpwardForce: 4
   _maxSpreadY: 0.6
   _maxSpreadZ: 0.6
   _power: 6
   _currentWeaponIndex: 3
-  _secondsBetweenSpawn: 3
+  _secondsBetweenSpawn: 2
+  _pool: {fileID: 2012366523}
 --- !u!114 &866570871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,8 +1071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6b309dab0de3d42a1e892b50998124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 866570867}
-  _wavePrefab: {fileID: 919132147560683692, guid: 49f935bc4745ab1468f7785d603bbfda, type: 3}
+  Pool: {fileID: 1500035979}
+  _enemyPrefab: {fileID: 0}
   _secondsBetweenSpawn: 3
   _spawnPoints:
   - {fileID: 219422381}
@@ -1393,6 +1397,51 @@ Transform:
   m_Father: {fileID: 1691265429}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1500035978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1500035980}
+  - component: {fileID: 1500035979}
+  m_Layer: 0
+  m_Name: BigStickmanPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1500035979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500035978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f62c7e7c4869d4197bcc123c529e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 5726484812908511038, guid: 49f935bc4745ab1468f7785d603bbfda, type: 3}
+--- !u!4 &1500035980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500035978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 866570867}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1543392779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,6 +1567,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1576004710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576004712}
+  - component: {fileID: 1576004711}
+  m_Layer: 0
+  m_Name: WaveStickmanPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1576004711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576004710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f62c7e7c4869d4197bcc123c529e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 2923749004743987348, guid: 1f0235100b661e944ad85f54e7570030, type: 3}
+--- !u!4 &1576004712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576004710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 866570867}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1625661624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.03977778, y: 0.48043755}
   m_AnchorMax: {x: 0.14977778, y: 0.79375005}
-  m_AnchoredPosition: {x: 3.5, y: -39.5}
+  m_AnchoredPosition: {x: 3.5080566, y: -39.5}
   m_SizeDelta: {x: 546.8608, y: -477.3672}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625661626
@@ -1677,6 +1771,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1691265429}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1724243957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724243959}
+  - component: {fileID: 1724243958}
+  m_Layer: 0
+  m_Name: LineStickmanPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1724243958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724243957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f62c7e7c4869d4197bcc123c529e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3592553878796274958, guid: 419258ba81e77144cb2c79a1d8ccd880, type: 3}
+--- !u!4 &1724243959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724243957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 866570867}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881317671
 GameObject:
@@ -1878,6 +2017,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2012366522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012366524}
+  - component: {fileID: 2012366523}
+  m_Layer: 0
+  m_Name: WeaponPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2012366523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012366522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f62c7e7c4869d4197bcc123c529e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7197699912068607702, guid: 486783a310101184da277b7f0b37e853, type: 3}
+--- !u!4 &2012366524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012366522}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 866570867}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2136087897
 GameObject:

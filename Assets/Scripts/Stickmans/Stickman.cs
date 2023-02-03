@@ -32,7 +32,12 @@ public class Stickman : MonoBehaviour
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToDisappear);
         yield return waitForSeconds;
-        Spawner.ReturnGameObject(gameObject, Spawner.Pool);
+        Spawner.ReturnGameObject(gameObject);
         _coroutineAllowed = true;
+    }
+
+    public void Initialize(StickmanSpawner spawner)
+    {
+        Spawner = spawner;
     }
 }

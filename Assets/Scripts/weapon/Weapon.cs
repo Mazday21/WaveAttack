@@ -15,7 +15,8 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        WeaponSpawner spawner = transform.parent.gameObject.GetComponent<WeaponSpawner>();
+        WeaponSpawner spawner = GetComponentInParent<WeaponSpawner>();
+        Debug.Log(spawner);
         _spawner = spawner;
     }
 
@@ -36,7 +37,7 @@ public class Weapon : MonoBehaviour
     {
         if (!_isFallen)
         {
-            if (col.TryGetComponent(out StickmanWave stickman))
+            if (col.TryGetComponent(out Enemy stickman))
             {
                 stickman.Hit();
                 if (_coroutineAllowed)
@@ -60,7 +61,7 @@ public class Weapon : MonoBehaviour
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToVanishing);
         yield return waitForSeconds;
-        _spawner.ReturnGameObject(gameObject, _spawner.Pool);
+        _spawner.ReturnGameObject(gameObject);
         _isFallen = false;
         _coroutineAllowed = true;
     }

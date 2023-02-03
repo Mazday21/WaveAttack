@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSpawner : ObjectPool
+public class WeaponSpawner : MonoBehaviour
 {
     [SerializeField] private Weapon[] _weapons;
     [SerializeField] private Transform[] _points;
@@ -13,6 +13,7 @@ public class WeaponSpawner : ObjectPool
     [Range(_minPower, _maxPower)][SerializeField] private int _power;
     [SerializeField] private int _currentWeaponIndex;
     [SerializeField] private float _secondsBetweenSpawn;
+    [SerializeField] private ObjectPool _pool;
 
     private bool _coroutineAllowed = true;
     private Vector3[] _quaternionWeapon;
@@ -24,7 +25,6 @@ public class WeaponSpawner : ObjectPool
 
     private void Awake()
     {
-        InitializePool(Pool);
         ChangeWeapon();
     }
 
@@ -66,7 +66,7 @@ public class WeaponSpawner : ObjectPool
 
     private void ChangeWeapon()
     {
-        InitializePrefab(_weapons[_currentWeaponIndex].gameObject, Pool);
+        _pool.InitializePrefab();
     }
 
     public void ChangeWeaponIndex(int index)
@@ -90,7 +90,7 @@ public class WeaponSpawner : ObjectPool
                 {
                     if (spawnPoint.IsEnable)
                     {
-                        GetOrInstantiateGameObject(out GameObject weapon, Pool);
+                        _pool.GetOrInstantiateGameObject(out GameObject weapon);
                         SetWeapon(spawnPoint.Transform, weapon);
                         SetDirectionThrow(spawnPoint.Transform, weapon);
                     }
@@ -129,9 +129,9 @@ public class WeaponSpawner : ObjectPool
         }
     }
 
-    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
+    public void ReturnGameObject(GameObject gameObject)
     {
-        base.ReturnGameObject(gameObject, Pool);
+        _pool.ReturnGameObject(gameObject);
     }
 
     struct SpawnPoint

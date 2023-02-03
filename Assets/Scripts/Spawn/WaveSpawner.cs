@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class WaveSpawner : StickmanSpawner
 {
-    [SerializeField] private StickmanWave _wavePrefab;
+    [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private Transform[] _spawnPoints;
 
     protected bool _coroutineAllowed = true;
     private readonly int _hashAnimRun = Animator.StringToHash("Run");
-    private Queue<GameObject> _pool;
-
-    private void Awake()
-    {
-        InitializePool(_pool);
-        InitializePrefab(_wavePrefab.gameObject, _pool);
-    }
 
     private void Update()
     {
@@ -39,16 +32,16 @@ public class WaveSpawner : StickmanSpawner
     {
         foreach(Transform t in _spawnPoints)
         {
-            GetOrInstantiateGameObject(out GameObject waveStickman, _pool);
+            Pool.GetOrInstantiateGameObject(out GameObject waveStickman);
             SetStickman(waveStickman, t.position);
             Animator animator = waveStickman.GetComponent<Animator>();
             animator.Play(_hashAnimRun);
         }
     }
 
-    public override void ReturnGameObject(GameObject gameObject, Queue<GameObject> pool)
+    public override void ReturnGameObject(GameObject gameObject)
     {
-        base.ReturnGameObject(gameObject, Pool);
+        Pool.ReturnGameObject(gameObject);
         gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 }
