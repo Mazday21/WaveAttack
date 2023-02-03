@@ -8,7 +8,7 @@ public class StickmanSpawner : ObjectPool
 
     private void Awake()
     {
-        Pool = InitializePool(Pool);
+        InitializePool(Pool);
     }
 
     protected void SetStickman(GameObject Stickman, Vector3 spawnPoint)
