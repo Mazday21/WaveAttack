@@ -20,7 +20,8 @@ public class WeaponSpawner : MonoBehaviour
     private SpawnPoint[] _spawnPoints;
     private float _ratio;
     private const int _maxPower = 20;
-    private const int _minPower = 6;
+    private const int _minPower = 3;
+
     public Queue<GameObject> Pool;
 
     private void Awake()
@@ -44,7 +45,6 @@ public class WeaponSpawner : MonoBehaviour
             Transform transform = _weapons[i].GetComponent<Transform>();
             _quaternionWeapon[i] = transform.rotation.eulerAngles;
         }
-
     }
 
     private void Update()
@@ -66,7 +66,7 @@ public class WeaponSpawner : MonoBehaviour
 
     private void ChangeWeapon()
     {
-        _pool.InitializePrefab();
+        _pool.InitializePrefab(_weapons[_currentWeaponIndex].gameObject);
     }
 
     public void ChangeWeaponIndex(int index)
@@ -127,11 +127,6 @@ public class WeaponSpawner : MonoBehaviour
                  break;
             }
         }
-    }
-
-    public void ReturnGameObject(GameObject gameObject)
-    {
-        _pool.ReturnGameObject(gameObject);
     }
 
     struct SpawnPoint

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveSpawner : StickmanSpawner
+public class EnemySpawner : StickmanSpawner
 {
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private float _secondsBetweenSpawn;

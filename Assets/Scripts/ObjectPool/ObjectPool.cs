@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] protected GameObject _prefab;
 
-    private Queue<GameObject> _pool = new Queue<GameObject>();
+    protected Queue<GameObject> _pool = new Queue<GameObject>();
 
-    public void InitializePrefab()
+    public void InitializePrefab(GameObject prefab)
     {
-        GameObject spawned = Instantiate(_prefab, transform);
+        GameObject spawned = Instantiate(prefab, transform);
+        _prefab = prefab;
         _pool.Enqueue(spawned.gameObject);
     }
 
-    public void GetOrInstantiateGameObject(out GameObject result)
+    public virtual void GetOrInstantiateGameObject(out GameObject result)
     {
         if (!_pool.TryDequeue(out result))
         {

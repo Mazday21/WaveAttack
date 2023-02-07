@@ -8,16 +8,16 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _secondsToVanishing;
     [SerializeField] private Vector3 _Rotation;
 
-    private WeaponSpawner _spawner;
+    private WeaponPool _weaponPool;
     private bool _coroutineAllowed = true;
-
     private bool _isFallen = false;
 
     private void Awake()
     {
-        WeaponSpawner spawner = GetComponentInParent<WeaponSpawner>();
-        Debug.Log(spawner);
-        _spawner = spawner;
+        if (_weaponPool is null)
+        {
+            _weaponPool = GetComponentInParent<WeaponPool>();
+        }
     }
 
     private void Update()
@@ -31,6 +31,11 @@ public class Weapon : MonoBehaviour
         {
             transform.Rotate(_Rotation * Time.deltaTime);
         }
+    }
+
+    public void SetWeaponPool(WeaponPool weaponPool)
+    {
+        _weaponPool = weaponPool;
     }
 
     private void OnTriggerEnter(Collider col)
@@ -61,7 +66,7 @@ public class Weapon : MonoBehaviour
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsToVanishing);
         yield return waitForSeconds;
-        _spawner.ReturnGameObject(gameObject);
+        _weaponPool.ReturnGameObject(gameObject);
         _isFallen = false;
         _coroutineAllowed = true;
     }
