@@ -22,8 +22,6 @@ public class WeaponSpawner : MonoBehaviour
     private const int _maxPower = 20;
     private const int _minPower = 3;
 
-    public Queue<GameObject> Pool;
-
     private void Awake()
     {
         ChangeWeapon();
@@ -51,11 +49,11 @@ public class WeaponSpawner : MonoBehaviour
     {
         if (_coroutineAllowed)
         {
-            StartCoroutine(Delay());
+            StartCoroutine(DelaySpawn());
         }
     }
 
-    private IEnumerator Delay()
+    private IEnumerator DelaySpawn()
     {
         _coroutineAllowed = false;
         WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);

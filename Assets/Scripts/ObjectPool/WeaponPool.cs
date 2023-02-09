@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WeaponPool : ObjectPool
 {
-    [SerializeField] private WeaponSpawner weaponSpawner;
-
     public override void GetOrInstantiateGameObject(out GameObject result)
     {
         if (_pool.TryDequeue(out result))
