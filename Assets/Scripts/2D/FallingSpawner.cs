@@ -9,7 +9,6 @@ public class FallingSpawner : MonoBehaviour
     [SerializeField] private Fallings[] _fallingsBonuses;
     [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private FollowCursor _followCursor;
-    [SerializeField] private WeaponSpawner _weaponSpawner;
     [SerializeField] private FallingPool _fallingPool;
 
     private bool _coroutineAllowed = true;
@@ -24,7 +23,7 @@ public class FallingSpawner : MonoBehaviour
     private GameObject _first;
     private GameObject _second;
 
-    private void Awake()
+    private void Start()
     {
         _camera = GetComponent<Camera>();
         _offsetZ = _followCursor.OffsetZ;

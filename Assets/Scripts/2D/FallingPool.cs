@@ -12,18 +12,18 @@ public class FallingPool : MonoBehaviour
     {
         for (int i = 0; i < _poolMultiplier; i++)
         {
-            InitializeList(_fallingsWeapons);
-            InitializeList(_fallingsBonuses);
+            AddInList(_fallingsWeapons, _poolWeapon);
+            AddInList(_fallingsBonuses, _poolBonuses);
         }
     }
 
-    private void InitializeList(Fallings[] _fallingsWeapons)
+    private void AddInList(Fallings[] _fallings, List<GameObject> list)
     {
-        foreach (Fallings falling in _fallingsWeapons)
+        foreach (Fallings falling in _fallings)
         {
             GameObject spawned = Instantiate(falling.gameObject, transform);
             spawned.SetActive(false);
-            _poolWeapon.Add(spawned);
+            list.Add(spawned);
         }
     }
 
