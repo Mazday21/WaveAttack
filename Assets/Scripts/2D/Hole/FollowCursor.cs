@@ -12,10 +12,9 @@ public class FollowCursor : MonoBehaviour
 
     public float OffsetZ { get; private set; }
 
-    void Awake()
+    void Start()
     {
         _imagePosition.y = transform.position.y;
-        //OffsetZ = transform.position.z;
         OffsetZ = offsetZ;
     }
 

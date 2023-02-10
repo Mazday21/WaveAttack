@@ -13,9 +13,13 @@ public class Stickman : MonoBehaviour
     private bool _coroutineAllowed = true;
     public bool IsAlive = true;
 
-    public void Hit()
+    private void Start()
     {
         Animator = GetComponent<Animator>();
+    }
+
+    public void Hit()
+    {
         Animator.SetBool(_hashAnimDead, true);
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;

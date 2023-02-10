@@ -15,7 +15,6 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private ObjectPool _pool;
 
-    private bool _coroutineAllowed = true;
     private Vector3[] _quaternionWeapon;
     private SpawnPoint[] _spawnPoints;
     private float _ratio;
@@ -43,23 +42,6 @@ public class WeaponSpawner : MonoBehaviour
             Transform transform = _weapons[i].GetComponent<Transform>();
             _quaternionWeapon[i] = transform.rotation.eulerAngles;
         }
-    }
-
-    private void Update()
-    {
-        if (_coroutineAllowed)
-        {
-            StartCoroutine(DelaySpawn());
-        }
-    }
-
-    private IEnumerator DelaySpawn()
-    {
-        _coroutineAllowed = false;
-        WaitForSeconds waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);
-        Spawn(_power);
-        yield return waitForSeconds;
-        _coroutineAllowed = true;
     }
 
     private void ChangeWeapon()
