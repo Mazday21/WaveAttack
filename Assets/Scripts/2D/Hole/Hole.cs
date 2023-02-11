@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private Power _power;
     [SerializeField] private LineSpawner _lineSpawner;
     [SerializeField] private WeaponSpawner _weaponSpawner;
     [SerializeField] private float _delayToAnimation;
 
-    private int _banana = 0;
-    private int _pineapple = 1;
-    private int _watermelon = 2;
-    private int _axe = 3;
     private WaitForSeconds _waitForSeconds;
 
     private void Start()
@@ -24,33 +20,17 @@ public class Hole : MonoBehaviour
     {
         if (col.TryGetComponent(out Fallings falling))
         {
-            if(falling.TryGetComponent(out DoubleFalling Dfalling))
+            if(falling.TryGetComponent(out PowerChanges change))
             {
-                _player.ChangePower(_player.Power * 2);
-            }
-            else if (falling.TryGetComponent(out MinusFiveFalling M5falling))
-            {
-                _player.ChangePower(_player.Power - 3);
+                _power.ChangePower(change);
             }
             else if (falling.TryGetComponent(out HeartFalling Hfalling))
             {
                 _lineSpawner.Spawn();
             }
-            else if (falling.TryGetComponent(out BananaFalling Bfalling))
+            else if (falling.TryGetComponent(out Weapon weapon))
             {
-                _weaponSpawner.ChangeWeaponIndex(_banana);
-            }
-            else if (falling.TryGetComponent(out PineappleFalling Pfalling))
-            {
-                _weaponSpawner.ChangeWeaponIndex(_pineapple);
-            }
-            else if (falling.TryGetComponent(out WatermelonFalling Wfalling))
-            {
-                _weaponSpawner.ChangeWeaponIndex(_watermelon);
-            }
-            else if (falling.TryGetComponent(out AxeFalling Afalling))
-            {
-                _weaponSpawner.ChangeWeaponIndex(_axe);
+                _weaponSpawner.ChangeWeaponIndex(weapon);
             }
 
             _lineSpawner.StartThrowAnimated();
@@ -62,6 +42,6 @@ public class Hole : MonoBehaviour
     private IEnumerator DelayAnimation()
     {
         yield return _waitForSeconds;
-        _weaponSpawner.Spawn(_player.Power);
+        _weaponSpawner.Spawn(_power.Value);
     }
 }

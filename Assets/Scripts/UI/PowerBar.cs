@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PowerBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private Player _player;
+    [SerializeField] private Power _power;
 
     public void OnValueChanged(int value, int maxValue)
     {
@@ -17,12 +17,12 @@ public class PowerBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.PowerChanged += OnValueChanged;
-        _slider.value = _player.Power;
+        _power.ValueChanged += OnValueChanged;
+        _slider.value = 0.01f;
     }
 
     private void OnDisable()
     {
-        _player.PowerChanged -= OnValueChanged;
+        _power.ValueChanged -= OnValueChanged;
     }
 }

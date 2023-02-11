@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinusFiveFalling : Fallings
+public class MinusFiveFalling : PowerChanges
 {
     
 }

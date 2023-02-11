@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3467726044580080511}
   - component: {fileID: 2406505319023527958}
   - component: {fileID: 3179134834688344998}
+  - component: {fileID: -2782515662920553963}
   m_Layer: 0
   m_Name: Watermelon
   m_TagString: Untagged
@@ -111,3 +112,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abdec0e7f8d98e4baf78198c45d9abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2782515662920553963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755250596156392823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6f2964e1d51944699a98b743097710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _secondsToVanishing: 0
+  _Rotation: {x: 0, y: 0, z: 0}

@@ -10,6 +10,8 @@ public class StickmanLine : Stickman
     private LineSpawner _spawner;
     private readonly int _hashAnimThrow = Animator.StringToHash("Threw");
 
+    public float PositionZ { get; private set; }
+
     private void Awake()
     {
         LineSpawner spawner = GetComponentInParent<LineSpawner>();
@@ -32,6 +34,11 @@ public class StickmanLine : Stickman
 
     public void PassEmptyPointZ()
     {
-        _spawner.AddEmptyPointZ((float)System.Math.Round(transform.position.z, 1));
+        _spawner.AddEmptyPointZ(PositionZ);
+    }
+
+    public void SetPositionZ(float positionZ)
+    {
+        PositionZ = positionZ;
     }
 }

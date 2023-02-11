@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleFalling : Fallings
+public class DoubleFalling : PowerChanges
 {
    
 }

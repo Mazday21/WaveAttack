@@ -11,10 +11,9 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] private float _maxSpreadY;
     [SerializeField] private float _maxSpreadZ;
     [Range(_minPower, _maxPower)][SerializeField] private int _power;
-    [SerializeField] private int _currentWeaponIndex;
-    [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private ObjectPool _pool;
 
+    private int _currentWeaponIndex;
     private Vector3[] _quaternionWeapon;
     private SpawnPoint[] _spawnPoints;
     private float _ratio;
@@ -49,13 +48,16 @@ public class WeaponSpawner : MonoBehaviour
         _pool.InitializePrefab(_weapons[_currentWeaponIndex].gameObject);
     }
 
-    public void ChangeWeaponIndex(int index)
+    public void ChangeWeaponIndex(Weapon weapon)
     {
-        if (index < 0 || index >= _weapons.Length)
+        for(int i = 0; i < _weapons.Length; i++)
         {
-            throw new System.ArgumentException(index + " goes beyond");
+            if (weapon.name.StartsWith(_weapons[i].name))
+            {
+                _currentWeaponIndex = i;
+                break;
+            }
         }
-        _currentWeaponIndex = index;
         ChangeWeapon();
     }
 

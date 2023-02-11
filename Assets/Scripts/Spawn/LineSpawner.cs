@@ -19,13 +19,14 @@ public class LineSpawner : StickmanSpawner
     private void Start()
     {
 
-        foreach(Transform i in _points)
+        foreach(Transform point in _points)
         {
             Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
-            SetStickman(lineStickman, i.position);
+            StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
+            stickmanLine.SetPositionZ(point.position.z);
+            SetStickman(lineStickman, point.position);
             _lineStickmans.Add(lineStickman.GetComponent<StickmanLine>());
             var animator = lineStickman.GetComponent<Animator>();
-            Debug.Log(animator.name);
         }
         _spawnPoints = new SpawnPoint[_points.Length];
 
@@ -37,7 +38,7 @@ public class LineSpawner : StickmanSpawner
 
     public void AddEmptyPointZ(float positionZ)
     {
-        for (int i = 0; i< _spawnPoints.Length; i++)
+        for (int i = 0; i < _spawnPoints.Length; i++)
         {
             if(_spawnPoints[i].Transform.position.z == positionZ)
             {
@@ -58,6 +59,8 @@ public class LineSpawner : StickmanSpawner
             {
                 _weaponSpawner.ChangeConditionSpawnPoint(_spawnPoints[i].Transform.position.z, true);
                 Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
+                StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
+                stickmanLine.SetPositionZ(_spawnPoints[i].Transform.position.z);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
                 _lineStickmans.Add(lineStickman.GetComponent<StickmanLine>());
                 _spawnPoints[i].IsEnable = false;
@@ -65,7 +68,7 @@ public class LineSpawner : StickmanSpawner
 
                 if (_countEmptyPoints == 0)
                     AllowSpawn = false;
-                break;
+                //break;
             }
         }
     }
@@ -74,7 +77,6 @@ public class LineSpawner : StickmanSpawner
     {
         if(_lineStickmans.Count > 0)
             _lineStickmans.ForEach(lineStickman => lineStickman.Throw());
-
     }
 
     struct SpawnPoint

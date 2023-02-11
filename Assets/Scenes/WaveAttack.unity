@@ -932,8 +932,6 @@ MonoBehaviour:
   _maxSpreadY: 0.6
   _maxSpreadZ: 0.6
   _power: 3
-  _currentWeaponIndex: 3
-  _secondsBetweenSpawn: 4
   _pool: {fileID: 2012366525}
 --- !u!114 &866570871
 MonoBehaviour:
@@ -1139,6 +1137,7 @@ GameObject:
   - component: {fileID: 971575511}
   - component: {fileID: 971575512}
   - component: {fileID: 971575513}
+  - component: {fileID: 971575514}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1265,6 +1264,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dd1704e1ede594585a9e3816b161f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &971575514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971575506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f05cdeecddc3604d9db95527da3ee16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minusFive: {fileID: 5546201566889056159, guid: 87c88f15ea8df1f4987eeb424bca74b7, type: 3}
+  _double: {fileID: 8108511391674929214, guid: c3aa4fb8cd1bc864c8841daeddb60e2b, type: 3}
 --- !u!1 &1063498316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 1788814701}
-  _player: {fileID: 971575513}
+  _power: {fileID: 971575514}
 --- !u!1 &1868263133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2507,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3945735968313484111, guid: 142b2931926187048ac1eff879f6d4a3, type: 3}
     - target: {fileID: 7549105151961478573, guid: e955220ffa8a37f49bde4b0e18103319, type: 3}
+      propertyPath: _power
+      value: 
+      objectReference: {fileID: 971575514}
+    - target: {fileID: 7549105151961478573, guid: e955220ffa8a37f49bde4b0e18103319, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 971575513}
@@ -2507,7 +2524,7 @@ PrefabInstance:
       objectReference: {fileID: 866570870}
     - target: {fileID: 7549105151961478573, guid: e955220ffa8a37f49bde4b0e18103319, type: 3}
       propertyPath: _delayToAnimation
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e955220ffa8a37f49bde4b0e18103319, type: 3}
