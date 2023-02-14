@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,39 +10,54 @@ public class Hole : MonoBehaviour
     [SerializeField] private WeaponSpawner _weaponSpawner;
     [SerializeField] private float _delayToAnimation;
 
-    private WaitForSeconds _waitForSeconds;
+    private WaitForSeconds _waitForAnimation;
+    private WaitForSeconds _waitToCollision;
+    private float _delayToCol = 2;
+    private bool _isActive = true;
 
     private void Start()
     {
-        _waitForSeconds = new WaitForSeconds(_delayToAnimation);
+        _waitForAnimation = new WaitForSeconds(_delayToAnimation);
+        _waitToCollision = new WaitForSeconds(_delayToCol);
     }
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.TryGetComponent(out Fallings falling))
         {
-            if(falling.TryGetComponent(out PowerChanges change))
+            if(_isActive)
             {
-                _power.ChangePower(change);
-            }
-            else if (falling.TryGetComponent(out HeartFalling Hfalling))
-            {
-                _lineSpawner.Spawn();
-            }
-            else if (falling.TryGetComponent(out Weapon weapon))
-            {
-                _weaponSpawner.ChangeWeaponIndex(weapon);
-            }
+                _isActive = false;
 
-            _lineSpawner.StartThrowAnimated();
-            StartCoroutine(DelayAnimation());
-            Destroy(falling.gameObject);
+                if (falling.TryGetComponent(out PowerChanges change))
+                {
+                    _power.ChangePower(change);
+                }
+                else if (falling.TryGetComponent(out HeartFalling Hfalling))
+                {
+                    _lineSpawner.Spawn();
+                }
+                else if (falling.TryGetComponent(out WeaponFallings weapon))
+                {
+                    _weaponSpawner.ChangeWeaponIndex(weapon);
+                }
+                _lineSpawner.StartThrowAnimated();
+                StartCoroutine(DelayAnimation());
+                Destroy(falling.gameObject);
+                StartCoroutine(DelayActive());
+            }
         }
+    }
+
+    private IEnumerator DelayActive()
+    {
+        yield return _waitToCollision;
+        _isActive = true;
     }
 
     private IEnumerator DelayAnimation()
     {
-        yield return _waitForSeconds;
+        yield return _waitForAnimation;
         _weaponSpawner.Spawn(_power.Value);
     }
 }

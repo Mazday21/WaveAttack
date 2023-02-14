@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WatermelonFalling : Fallings
+public class WatermelonFalling : WeaponFallings
 {
     
 }

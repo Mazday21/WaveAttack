@@ -1,10 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fallings : MonoBehaviour
 {
-    private float _speed = 1;
+    private float _speed = 4f;
+    private float _secondsToDestroy = 3f;
+
+    private void Start()
+    {
+        Destroy(gameObject, _secondsToDestroy);
+    }
 
     private void Update()
     {
@@ -13,6 +21,6 @@ public class Fallings : MonoBehaviour
 
     private void Fall()
     {
-        transform.Translate(Vector3.up * -1 * _speed * Time.deltaTime);
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
     }
 }

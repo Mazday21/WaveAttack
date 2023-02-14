@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class FollowCursor : MonoBehaviour
 {
-    [SerializeField] private float offsetZ = 6f;
+    [SerializeField] private Camera _camera;
+    
+    private Vector3 _startPosition;
 
-    private Vector3 _position;
-    private Vector3 _imagePosition;
-    private float _offsetY = 80;
-
-    public float OffsetZ { get; private set; }
-
-    void Start()
+    private void Start()
     {
-        _imagePosition.y = transform.position.y;
-        OffsetZ = offsetZ;
+        _startPosition = transform.position;
     }
 
-    private void Update()
+    void Update()
     {
-        _position = Input.mousePosition;
-        _position.z = offsetZ;
-        _position.y = _imagePosition.y + _offsetY;
-        transform.position = Camera.main.ScreenToWorldPoint(_position);
+        Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector3(mousePosition.x, transform.position.y, _startPosition.z);
     }
 }

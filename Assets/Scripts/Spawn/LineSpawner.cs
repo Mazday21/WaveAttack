@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class LineSpawner : StickmanSpawner
 {
@@ -12,27 +15,27 @@ public class LineSpawner : StickmanSpawner
 
     private SpawnPoint[] _spawnPoints;
     private int _countEmptyPoints;
-    private List<StickmanLine> _lineStickmans = new List<StickmanLine>();
+    private Dictionary<float, StickmanLine> _lineStickmans = new Dictionary<float, StickmanLine>();
 
     public bool AllowSpawn { get; private set; }
 
     private void Start()
-    {
-
-        foreach(Transform point in _points)
-        {
-            Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
-            StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
-            stickmanLine.SetPositionZ(point.position.z);
-            SetStickman(lineStickman, point.position);
-            _lineStickmans.Add(lineStickman.GetComponent<StickmanLine>());
-            var animator = lineStickman.GetComponent<Animator>();
-        }
+    {        
         _spawnPoints = new SpawnPoint[_points.Length];
 
         for (int i = 0; i < _points.Length; i++)
         {
             _spawnPoints[i] = new SpawnPoint(_points[i], false);
+        }
+
+        foreach(SpawnPoint point in _spawnPoints)
+        {
+            Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
+            StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
+            stickmanLine.SetPositionZ(point.Transform.position.z);
+            SetStickman(lineStickman, point.Transform.position);
+            _lineStickmans.Add(point.Transform.position.z, stickmanLine);
+            var animator = lineStickman.GetComponent<Animator>();
         }
     }
 
@@ -44,6 +47,8 @@ public class LineSpawner : StickmanSpawner
             {
                 _spawnPoints[i].IsEnable = true;
                 _weaponSpawner.ChangeConditionSpawnPoint(positionZ, false);
+                _lineStickmans.Remove(positionZ);
+
                 break;
             }
         }
@@ -62,11 +67,11 @@ public class LineSpawner : StickmanSpawner
                 StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
                 stickmanLine.SetPositionZ(_spawnPoints[i].Transform.position.z);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
-                _lineStickmans.Add(lineStickman.GetComponent<StickmanLine>());
+                _lineStickmans.Add(_spawnPoints[i].Transform.position.z, stickmanLine);
                 _spawnPoints[i].IsEnable = false;
                 _countEmptyPoints--;
 
-                if (_countEmptyPoints == 0)
+                if(_countEmptyPoints == 0)
                     AllowSpawn = false;
                 //break;
             }
@@ -75,8 +80,13 @@ public class LineSpawner : StickmanSpawner
 
     public void StartThrowAnimated()
     {
-        if(_lineStickmans.Count > 0)
-            _lineStickmans.ForEach(lineStickman => lineStickman.Throw());
+        if (_lineStickmans.Count > 0)
+        {
+            foreach (KeyValuePair<float, StickmanLine> entry in _lineStickmans)
+            {
+                entry.Value.Throw();
+            }
+        }
     }
 
     struct SpawnPoint

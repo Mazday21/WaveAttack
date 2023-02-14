@@ -10,7 +10,6 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] private float _throwUpwardForce;
     [SerializeField] private float _maxSpreadY;
     [SerializeField] private float _maxSpreadZ;
-    [Range(_minPower, _maxPower)][SerializeField] private int _power;
     [SerializeField] private ObjectPool _pool;
 
     private int _currentWeaponIndex;
@@ -48,7 +47,7 @@ public class WeaponSpawner : MonoBehaviour
         _pool.InitializePrefab(_weapons[_currentWeaponIndex].gameObject);
     }
 
-    public void ChangeWeaponIndex(Weapon weapon)
+    public void ChangeWeaponIndex(WeaponFallings weapon)
     {
         for(int i = 0; i < _weapons.Length; i++)
         {
@@ -63,7 +62,7 @@ public class WeaponSpawner : MonoBehaviour
 
     public void Spawn(int power)
     {
-        if (power > 0 || power <= _maxPower)
+        if (power > _minPower || power <= _maxPower)
         {
             _ratio = power / (float)_maxPower;
             for (int i = 1; i <= power; i++)

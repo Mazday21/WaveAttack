@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BananaPeel : Weapon, IWeapon
+public class BananaPeel : Weapon
 {
     
 }

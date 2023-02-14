@@ -15,7 +15,14 @@ public class Stickman : MonoBehaviour
 
     private void Start()
     {
-        Animator = GetComponent<Animator>();
+        if(Animator == null)
+            Animator = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        if (Animator == null)
+            Animator = GetComponent<Animator>();
     }
 
     public void Hit()
