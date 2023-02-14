@@ -14,7 +14,7 @@ public class FallingSpawner : MonoBehaviour
     private bool _coroutineAllowed = true;
     private Vector3 _firstSpawnPoint;
     private Vector3 _secondSpawnPoint;
-    private float _offset = 1;
+    private float _offset = 3;
     private bool _chooseWeapon = false;
     private GameObject _first;
     private GameObject _second;
@@ -85,12 +85,12 @@ public class FallingSpawner : MonoBehaviour
     {
         _randomX1 = Random.Range(_leftSpawnPoint.transform.position.x , _rightSpawnPoint.transform.position.x );
         
-        if(Mathf.Abs(_leftSpawnPoint.transform.position.x - _randomX1) > Mathf.Abs(_randomX1 - _rightSpawnPoint.transform.position.x))
+        if(_randomX1 > 0)
         {
-            _randomX1 = Random.Range(_leftSpawnPoint.transform.position.x, _randomX1 - _offset);
+            _randomX2 = Random.Range(_leftSpawnPoint.transform.position.x, _randomX1 - _offset);
         }
         else
-            _randomX1 = Random.Range(_randomX1 + _offset, _rightSpawnPoint.transform.position.x);
+            _randomX2 = Random.Range(_randomX1 + _offset, _rightSpawnPoint.transform.position.x);
 
         _firstSpawnPoint = new Vector3(_randomX1, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
         _secondSpawnPoint = new Vector3(_randomX2, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
