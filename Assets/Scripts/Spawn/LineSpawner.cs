@@ -73,7 +73,7 @@ public class LineSpawner : StickmanSpawner
 
                 if(_countEmptyPoints == 0)
                     AllowSpawn = false;
-                //break;
+                break;
             }
         }
     }

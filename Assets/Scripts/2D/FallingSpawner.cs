@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FallingSpawner : MonoBehaviour
@@ -16,7 +14,7 @@ public class FallingSpawner : MonoBehaviour
     private bool _coroutineAllowed = true;
     private Vector3 _firstSpawnPoint;
     private Vector3 _secondSpawnPoint;
-    private float _offset = 2;
+    private float _offset = 1;
     private bool _chooseWeapon = false;
     private GameObject _first;
     private GameObject _second;
@@ -86,12 +84,14 @@ public class FallingSpawner : MonoBehaviour
     private void SetSpawnPoints()
     {
         _randomX1 = Random.Range(_leftSpawnPoint.transform.position.x , _rightSpawnPoint.transform.position.x );
-        _randomX2 = Random.Range(_leftSpawnPoint.transform.position.x , _rightSpawnPoint.transform.position.x );
-
-        while (_randomX2 > _randomX1 - _offset && _randomX2 < _randomX1 + _offset)
+        
+        if(Mathf.Abs(_leftSpawnPoint.transform.position.x - _randomX1) > Mathf.Abs(_randomX1 - _rightSpawnPoint.transform.position.x))
         {
-            _randomX2 = Random.Range(_leftSpawnPoint.transform.position.z, _rightSpawnPoint.transform.position.z);
+            _randomX1 = Random.Range(_leftSpawnPoint.transform.position.x, _randomX1 - _offset);
         }
+        else
+            _randomX1 = Random.Range(_randomX1 + _offset, _rightSpawnPoint.transform.position.x);
+
         _firstSpawnPoint = new Vector3(_randomX1, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
         _secondSpawnPoint = new Vector3(_randomX2, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
     }
