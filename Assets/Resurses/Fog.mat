@@ -96,7 +96,7 @@ Material:
     - _CameraDistanceFadeFar: 10
     - _CenterHeight: 2
     - _Cutoff: 0.5
-    - _Depth: 15
+    - _Depth: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _EnableExternalAlpha: 0
@@ -121,7 +121,7 @@ Material:
     - _UvFadeY: 0.1
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.90588236, g: 0.54509807, b: 0.98039216, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighColor: {r: 1, g: 0, b: 0, a: 0}
     - _LowColor: {r: 0, g: 0.16150902, b: 0.94509804, a: 0}
