@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlaytestingScene.unity
     guid: e9194b51a1daf184c974d1d1c2d66379
+  - enabled: 1
+    path: Assets/Scenes/WaveAttack.unity
+    guid: 6966f580e60764d4d96b05b5e75c6862
   m_configObjects: {}
