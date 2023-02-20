@@ -10,7 +10,7 @@ public class StickmanLine : Stickman
     private LineSpawner _spawner;
     private readonly int _hashAnimThrow = Animator.StringToHash("Threw");
 
-    public float PositionZ { get; private set; }
+    public Vector3 Position { get; private set; }
 
     private void Awake()
     {
@@ -30,15 +30,16 @@ public class StickmanLine : Stickman
     public void Throw()
     {
         Animator.SetTrigger(_hashAnimThrow);
+        transform.position = Position;
     }
 
     public void PassEmptyPointZ()
     {
-        _spawner.AddEmptyPointZ(PositionZ);
+        _spawner.AddEmptyPointZ(Position.z);
     }
 
-    public void SetPositionZ(float positionZ)
+    public void SetPosition(Vector3 position)
     {
-        PositionZ = positionZ;
+        Position = position;
     }
 }

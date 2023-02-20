@@ -14,14 +14,15 @@ public class FallingSpawner : MonoBehaviour
     private bool _coroutineAllowed = true;
     private Vector3 _firstSpawnPoint;
     private Vector3 _secondSpawnPoint;
-    private float _offset = 3;
+    private float _offset = 2;
     private bool _chooseWeapon = false;
     private GameObject _first;
     private GameObject _second;
     private WaitForSeconds _waitForSeconds;
-    private int _minusFive = 0;
-    private int _double = 1;
-    private int _heart = 2;
+    private int _plusFive = 0;
+    //private int _minusFive = 1;
+    //private int _double = 2;
+    private int _heart = 3;
     private float _randomX1;
     private float _randomX2;
 
@@ -66,14 +67,14 @@ public class FallingSpawner : MonoBehaviour
         {
             if (_lineSpawner.AllowSpawn)
             {
-            _first = Instantiate(_fallingsBonuses[Random.Range(_minusFive, _heart)].gameObject, transform);
+            _first = Instantiate(_fallingsBonuses[Random.Range(_plusFive, _heart)].gameObject, transform);
             _second = Instantiate(_fallingsBonuses[_heart].gameObject, transform);
 
             }
             else
             {
-                _first = Instantiate(_fallingsBonuses[_minusFive].gameObject, transform);
-                _second = Instantiate(_fallingsBonuses[_double].gameObject, transform);
+                _first = Instantiate(_fallingsBonuses[Random.Range(_plusFive, _heart)].gameObject, transform);
+                _second = Instantiate(_fallingsBonuses[Random.Range(_plusFive, _heart)].gameObject, transform);
             }
             _chooseWeapon = true;
         }
@@ -84,14 +85,19 @@ public class FallingSpawner : MonoBehaviour
     private void SetSpawnPoints()
     {
         _randomX1 = Random.Range(_leftSpawnPoint.transform.position.x , _rightSpawnPoint.transform.position.x );
-        
-        if(_randomX1 > 0)
+        Debug.Log(_leftSpawnPoint.transform.position.x);
+        Debug.Log(_rightSpawnPoint.transform.position.x);
+        Debug.Log(_randomX1);
+
+        if(_randomX1 > 11.5)
         {
+            Debug.Log(">0");
             _randomX2 = Random.Range(_leftSpawnPoint.transform.position.x, _randomX1 - _offset);
         }
         else
             _randomX2 = Random.Range(_randomX1 + _offset, _rightSpawnPoint.transform.position.x);
 
+        Debug.Log(_randomX2);
         _firstSpawnPoint = new Vector3(_randomX1, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
         _secondSpawnPoint = new Vector3(_randomX2, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
     }

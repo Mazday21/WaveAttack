@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class BananaPeel : Weapon
 {
-    
+    public int HashName { get; protected set; }
+
+    private void Start()
+    {
+        string name = "Banana";
+        HashName = name.GetHashCode();
+    }
 }

@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class DoubleFalling : PowerChanges
 {
-   
+    public override Color GetColor()
+    {
+        return Color.green;
+    }
+
+    public override int PowerChange(int power)
+    {
+        return power * 2;
+    }
 }

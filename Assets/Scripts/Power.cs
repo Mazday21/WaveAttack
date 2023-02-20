@@ -8,11 +8,14 @@ public class Power : MonoBehaviour
 {
     [SerializeField] private MinusFiveFalling _minusFive;
     [SerializeField] private DoubleFalling _double;
+    [SerializeField] private TimeScale _timeScale;
 
     private int _minPower = 3;
     private int _maxPower = 20;
-    private int _changeValue = 2;
-    private float _rotationTime = 2f;
+    private float _rotationTime = 10;
+    private float _delayToResetValueTime = 0.55f;
+    private float _slowdown = 5;
+
     public event UnityAction<int, int> ValueChanged;
     public event UnityAction PowerUp;
 
@@ -20,51 +23,31 @@ public class Power : MonoBehaviour
 
     private void Start()
     {
-        Value = _maxPower;
+        Value = _minPower;
     }
 
     public void ChangePower(PowerChanges change)
     {
-        //if (change.name.StartsWith(_minusFive.name))
-        //{
-        //    Value -= _changeValue;
+        Value = change.PowerChange(Value);
 
-        //    if (Value < _minPower)
-        //    {
-        //        Value = _minPower;
-        //    }
-
-        //    ValueChanged?.Invoke(Value, _maxPower);
-        //}
-        //else
-        //{
-        //    Value *= _changeValue;
-
-        //    if (Value > _maxPower)
-        //    {
-        //        Value = _maxPower;
-        //        PowerUp?.Invoke();
-        //        ValueChanged?.Invoke(Value, _maxPower);
-        //        StartCoroutine(DelayResetValue());
-        //    }
-        //    ValueChanged?.Invoke(Value, _maxPower);
-        //}
-        StartCoroutine(DelayResetValue());
+        if(Value < _minPower)
+        {
+            Value = _minPower;
+        }
+        else if (Value > _maxPower)
+        {
+            Value = _maxPower;
+            StartCoroutine(DelayResetValue());
+        }
+        ValueChanged?.Invoke(Value, _maxPower);
     }
 
     private IEnumerator DelayResetValue()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_delayToResetValueTime);
         PowerUp?.Invoke();
-        //Value = _minPower;
+        Value = _minPower;
         ValueChanged?.Invoke(Value, _maxPower);
-        Time.timeScale = 0.2f;
-        StartCoroutine(DelayNormalizeTimaScale());
-    }
-
-    private IEnumerator DelayNormalizeTimaScale()
-    {
-        yield return new WaitForSeconds(_rotationTime);
-        Time.timeScale = 1;
+        _timeScale.DilationTime(_slowdown, _rotationTime);
     }
 }

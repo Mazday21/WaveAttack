@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] private float _secondsToVanishing;
     [SerializeField] private Vector3 _Rotation;

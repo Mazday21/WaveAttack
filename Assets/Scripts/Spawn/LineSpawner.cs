@@ -32,7 +32,7 @@ public class LineSpawner : StickmanSpawner
         {
             Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
             StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
-            stickmanLine.SetPositionZ(point.Transform.position.z);
+            stickmanLine.SetPosition(point.Transform.position);
             SetStickman(lineStickman, point.Transform.position);
             _lineStickmans.Add(point.Transform.position.z, stickmanLine);
             var animator = lineStickman.GetComponent<Animator>();
@@ -65,7 +65,7 @@ public class LineSpawner : StickmanSpawner
                 _weaponSpawner.ChangeConditionSpawnPoint(_spawnPoints[i].Transform.position.z, true);
                 Pool.GetOrInstantiateGameObject(out GameObject lineStickman);
                 StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
-                stickmanLine.SetPositionZ(_spawnPoints[i].Transform.position.z);
+                stickmanLine.SetPosition(_spawnPoints[i].Transform.position);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
                 _lineStickmans.Add(_spawnPoints[i].Transform.position.z, stickmanLine);
                 _spawnPoints[i].IsEnable = false;

@@ -4,15 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Fallings : MonoBehaviour
+public abstract class Fallings : MonoBehaviour
 {
     private float _speed = 4f;
-    private float _secondsToDestroy = 3f;
-
-    private void Start()
-    {
-        Destroy(gameObject, _secondsToDestroy);
-    }
 
     private void Update()
     {
@@ -23,4 +17,6 @@ public class Fallings : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
     }
+
+    public abstract Color GetColor();
 }

@@ -14,11 +14,19 @@ public class Hole : MonoBehaviour
     private WaitForSeconds _waitToCollision;
     private float _delayToCol = 2;
     private bool _isActive = true;
+    private ParticleSystem _particle;
+    private ParticleSystem.MainModule _particleSettings;
+    private Color _white = Color.white;
+    private Color _red = Color.red;
+    private Color _green = Color.green;
 
     private void Start()
     {
         _waitForAnimation = new WaitForSeconds(_delayToAnimation);
         _waitToCollision = new WaitForSeconds(_delayToCol);
+        _particle = GetComponentInChildren<ParticleSystem>();
+        _particleSettings = _particle.main;
+        _particleSettings.startColor = new ParticleSystem.MinMaxGradient(_white);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -41,6 +49,8 @@ public class Hole : MonoBehaviour
                 {
                     _weaponSpawner.ChangeWeaponIndex(weapon);
                 }
+                _particleSettings.startColor = new ParticleSystem.MinMaxGradient(falling.GetColor());
+                _particle.Play();
                 _lineSpawner.StartThrowAnimated();
                 StartCoroutine(DelayAnimation());
                 Destroy(falling.gameObject);
