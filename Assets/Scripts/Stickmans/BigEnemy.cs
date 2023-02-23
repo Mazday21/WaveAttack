@@ -8,7 +8,7 @@ public class BigEnemy : Enemy
     private int _additionalHealthForBig = 1;
     private int _additionalReward = 1;
 
-    private void OnEnable()
+    protected override void Awake()
     {
         _particle = GetComponentInChildren<ParticleSystem>();
         Reward += _additionalReward;

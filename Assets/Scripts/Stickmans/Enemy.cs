@@ -10,7 +10,7 @@ public class Enemy : Stickman
 
     public int Reward { get; protected set; } = 1;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         StartHealth += _additionalHealthForEnemy;
     }
