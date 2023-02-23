@@ -12,6 +12,7 @@ public class ObjectPool : MonoBehaviour
         GameObject spawned = Instantiate(prefab, transform);
         _prefab = prefab;
         _pool.Enqueue(spawned.gameObject);
+        spawned.SetActive(false); 
     }
 
     public virtual void GetOrInstantiateGameObject(out GameObject result)

@@ -17,9 +17,12 @@ Preset:
     value: 
     objectReference: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   - target: {fileID: 0}
-    propertyPath: m_ShaderKeywords
-    value: DR_RIM_ON DR_SPECULAR_ON _CELPRIMARYMODE_SINGLE _FLAT_SHADOWS_ENABLED _FLAT_SPECULAR_ENABLED
-      _UNITYSHADOWMODE_NONE
+    propertyPath: m_ValidKeywords.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_InvalidKeywords.Array.size
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_LightmapFlags
@@ -311,6 +314,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_TexEnvs.Array.data[10].second.m_Offset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Ints.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -1065,3 +1072,8 @@ Preset:
     propertyPath: m_SavedProperties.m_Colors.Array.data[13].second.a
     value: 1
     objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_BuildTextureStacks.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

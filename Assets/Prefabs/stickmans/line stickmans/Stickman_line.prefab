@@ -420,10 +420,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2594998
+  m_Radius: 0.5147136
   m_Height: 1.6644495
   m_Direction: 1
-  m_Center: {x: -3.838441e-16, y: 0.8662981, z: -0.08951061}
+  m_Center: {x: -3.377887e-16, y: 0.8662981, z: -0.14876974}
 --- !u!114 &36790072105779399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secondsToDisappear: 3
-  IsAlive: 1
 --- !u!54 &2230695936190040115
 Rigidbody:
   m_ObjectHideFlags: 0

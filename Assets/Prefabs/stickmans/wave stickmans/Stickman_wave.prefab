@@ -360,7 +360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _secondsToDisappear: 2
-  IsAlive: 1
   _speed: 2.5
 --- !u!136 &7955899993053234678
 CapsuleCollider:

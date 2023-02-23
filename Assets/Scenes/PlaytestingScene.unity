@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -317,7 +317,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &276226883
 MonoBehaviour:
@@ -858,7 +858,7 @@ Transform:
   - {fileID: 904487624}
   - {fileID: 1042817531}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -952,7 +952,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &769646314 stripped
 Transform:
@@ -1256,7 +1256,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 17, y: -90, z: 0}
 --- !u!1 &968691398
 GameObject:
@@ -1534,8 +1534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f097df3c00ab0464185ffc7d7c8b9482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 1451100196}
-  _wavePrefab: {fileID: 527202237, guid: 1f0235100b661e944ad85f54e7570030, type: 3}
+  Pool: {fileID: 0}
+  _enemyPrefab: {fileID: 0}
   _secondsBetweenSpawn: 3
   _spawnPoints:
   - {fileID: 353346485}
@@ -1557,7 +1557,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1451100197
 MonoBehaviour:
@@ -1571,15 +1571,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882e299ab24a40240a4574a800a5e938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _container: {fileID: 1451100196}
+  Pool: {fileID: 0}
   _linePrefab: {fileID: 36790072105779399, guid: 419258ba81e77144cb2c79a1d8ccd880, type: 3}
-  _spawnPoints:
-  - {fileID: 954495676}
-  - {fileID: 1189470203}
-  - {fileID: 968691399}
-  - {fileID: 518905585}
-  - {fileID: 904487624}
-  - {fileID: 1042817531}
+  _points: []
+  _weaponSpawner: {fileID: 0}
 --- !u!1 &1500178147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,7 +1768,7 @@ Transform:
   - {fileID: 561272301}
   - {fileID: 769646314}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811562089
 GameObject:
@@ -1872,7 +1867,7 @@ Transform:
   - {fileID: 251928987}
   - {fileID: 438885967}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1924308567 stripped
 Transform:

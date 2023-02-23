@@ -9,6 +9,7 @@ public class StickmanLine : Stickman
 {
     private LineSpawner _spawner;
     private readonly int _hashAnimThrow = Animator.StringToHash("Threw");
+    private int _damage = 1;
 
     public Vector3 Position { get; private set; }
 
@@ -22,8 +23,9 @@ public class StickmanLine : Stickman
     {
         if (col.TryGetComponent(out Enemy stickman))
         {
-            Hit();
+            Hit(_damage);
             PassEmptyPointZ();
+            transform.position += new Vector3(0, -0.24f, 0);
         }
     }
 

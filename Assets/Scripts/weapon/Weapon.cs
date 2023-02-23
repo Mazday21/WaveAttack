@@ -11,6 +11,7 @@ public abstract class Weapon : MonoBehaviour
     private WeaponPool _weaponPool;
     private bool _coroutineAllowed = true;
     private bool _isFallen = false;
+    protected int _damage = 1;
 
     private void Awake()
     {
@@ -44,7 +45,8 @@ public abstract class Weapon : MonoBehaviour
         {
             if (col.TryGetComponent(out Enemy stickman))
             {
-                stickman.Hit();
+                stickman.Hit(_damage);
+
                 if (_coroutineAllowed)
                 {
                     StartCoroutine(DelayVanishing());
@@ -54,6 +56,7 @@ public abstract class Weapon : MonoBehaviour
         if (col.TryGetComponent(out Track track))
         {
             _isFallen = true;
+
             if (_coroutineAllowed)
             {
                 StartCoroutine(DelayVanishing());

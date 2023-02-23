@@ -16,9 +16,6 @@ public class Hole : MonoBehaviour
     private bool _isActive = true;
     private ParticleSystem _particle;
     private ParticleSystem.MainModule _particleSettings;
-    private Color _white = Color.white;
-    private Color _red = Color.red;
-    private Color _green = Color.green;
 
     private void Start()
     {
@@ -26,7 +23,6 @@ public class Hole : MonoBehaviour
         _waitToCollision = new WaitForSeconds(_delayToCol);
         _particle = GetComponentInChildren<ParticleSystem>();
         _particleSettings = _particle.main;
-        _particleSettings.startColor = new ParticleSystem.MinMaxGradient(_white);
     }
 
     private void OnTriggerEnter(Collider col)

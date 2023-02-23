@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FallingSpawner : MonoBehaviour
@@ -8,27 +9,28 @@ public class FallingSpawner : MonoBehaviour
     [SerializeField] private Fallings[] _fallingsBonuses;
     [SerializeField] private Camera _camera;
     [SerializeField] private LineSpawner _lineSpawner;
-    [SerializeField] private GameObject _leftSpawnPoint;
-    [SerializeField] private GameObject _rightSpawnPoint;
 
     private bool _coroutineAllowed = true;
     private Vector3 _firstSpawnPoint;
     private Vector3 _secondSpawnPoint;
-    private float _offset = 2;
+    private float _offset = 1.4f;
     private bool _chooseWeapon = false;
     private GameObject _first;
     private GameObject _second;
-    private WaitForSeconds _waitForSeconds;
+    private WaitForSeconds _waitForSpawn;
     private int _plusFive = 0;
     //private int _minusFive = 1;
     //private int _double = 2;
     private int _heart = 3;
     private float _randomX1;
     private float _randomX2;
+    private float _center = 11.5f;
+    private Vector3 _leftSpawnPoint;
+    private Vector3 _rightSpawnPoint;
 
     private void Start()
     {
-        _waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);  
+        _waitForSpawn = new WaitForSeconds(_secondsBetweenSpawn);  
     }
 
     private void Update()
@@ -43,7 +45,7 @@ public class FallingSpawner : MonoBehaviour
     {
         _coroutineAllowed = false;
         Spawn();
-        yield return _waitForSeconds;
+        yield return _waitForSpawn;
         _coroutineAllowed = true;
     }
 
@@ -84,22 +86,18 @@ public class FallingSpawner : MonoBehaviour
 
     private void SetSpawnPoints()
     {
-        _randomX1 = Random.Range(_leftSpawnPoint.transform.position.x , _rightSpawnPoint.transform.position.x );
-        Debug.Log(_leftSpawnPoint.transform.position.x);
-        Debug.Log(_rightSpawnPoint.transform.position.x);
-        Debug.Log(_randomX1);
+        _leftSpawnPoint = _camera.ScreenToWorldPoint(new Vector3(0f, _camera.pixelHeight, _offset)) + new Vector3(_offset, 0,0);
+        _rightSpawnPoint = _camera.ScreenToWorldPoint(new Vector3(_camera.pixelWidth, _camera.pixelHeight, _offset)) - new Vector3(_offset, 0, 0);
+        _randomX1 = Random.Range(_leftSpawnPoint.x , _rightSpawnPoint.x );
 
-        if(_randomX1 > 11.5)
+        if(_randomX1 > _center)
         {
-            Debug.Log(">0");
-            _randomX2 = Random.Range(_leftSpawnPoint.transform.position.x, _randomX1 - _offset);
+            _randomX2 = Random.Range(_leftSpawnPoint.x, _randomX1 - _offset);
         }
         else
-            _randomX2 = Random.Range(_randomX1 + _offset, _rightSpawnPoint.transform.position.x);
+            _randomX2 = Random.Range(_randomX1 + _offset, _rightSpawnPoint.x);
 
-        Debug.Log(_randomX2);
-        _firstSpawnPoint = new Vector3(_randomX1, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
-        _secondSpawnPoint = new Vector3(_randomX2, _leftSpawnPoint.transform.position.y, _leftSpawnPoint.transform.position.z);
+        _firstSpawnPoint = new Vector3(_randomX1, _leftSpawnPoint.y, _leftSpawnPoint.z);
+        _secondSpawnPoint = new Vector3(_randomX2, _leftSpawnPoint.y, _leftSpawnPoint.z);
     }
-
 }

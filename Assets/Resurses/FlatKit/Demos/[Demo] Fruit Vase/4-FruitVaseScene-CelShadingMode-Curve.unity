@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1379454, g: 0.099569544, b: 0.09563347, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,32 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &139612807
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hidden/FogPlus
-  m_Shader: {fileID: 4800000, guid: 39ef0b8c9be96494d9f8b2f2c54a28c5, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +212,7 @@ Transform:
   m_LocalRotation: {x: -0.7537587, y: -0.21504672, z: 0.08803062, w: -0.61469775}
   m_LocalPosition: {x: -0.41, y: 3.69, z: 0.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -350,7 +325,7 @@ MonoBehaviour:
   heightFogIntensity: 1
   useHeightFogOnSky: 0
   distanceHeightBlend: 0.5
-  material: {fileID: 139612807}
+  material: {fileID: 1060500404}
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -404,6 +379,7 @@ Transform:
   m_LocalRotation: {x: 0.05690278, y: -0, z: -0, w: 0.99837977}
   m_LocalPosition: {x: 0, y: 0.807, z: -2.219}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -452,6 +428,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -500,6 +477,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.17239165, y: -0.1107589, z: 0.014289558}
   m_LocalScale: {x: 0.5402808, y: 0.006588562, z: 0.5402808}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 694818465}
   m_RootOrder: 2
@@ -548,6 +526,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -596,6 +575,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.17239165, y: -0.11785889, z: 0.014289558}
   m_LocalScale: {x: 0.55857885, y: 0.0059923804, z: 0.55857885}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 694818465}
   m_RootOrder: 1
@@ -626,6 +606,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.17239168, y: 0.4758589, z: -0.014289618}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 968657114}
   - {fileID: 662507571}
@@ -713,8 +694,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 54b0138cd42124ec38a7f41ad7e6088f, type: 3}
 --- !u!4 &921582384 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 54b0138cd42124ec38a7f41ad7e6088f,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 54b0138cd42124ec38a7f41ad7e6088f, type: 3}
   m_PrefabInstance: {fileID: 921582383}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &968657113
@@ -988,10 +968,37 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: f4fba88b9d58c4364aedb1cac75902d4, type: 3}
 --- !u!4 &968657114 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400036, guid: f4fba88b9d58c4364aedb1cac75902d4,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400036, guid: f4fba88b9d58c4364aedb1cac75902d4, type: 3}
   m_PrefabInstance: {fileID: 968657113}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1060500404
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hidden/FogPlus
+  m_Shader: {fileID: 4800000, guid: 39ef0b8c9be96494d9f8b2f2c54a28c5, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &1873427981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,6 +1047,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 694818465}
   m_Father: {fileID: 0}

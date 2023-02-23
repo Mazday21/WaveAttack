@@ -6,6 +6,11 @@ public class Watermelon : Weapon
 {
     public int HashName { get; protected set; }
 
+    private void OnEnable()
+    {
+        _damage = 2;
+    }
+
     private void Start()
     {
         string name = "Watermelon";

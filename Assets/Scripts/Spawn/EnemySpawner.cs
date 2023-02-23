@@ -8,7 +8,7 @@ public class EnemySpawner : StickmanSpawner
     [SerializeField] private float _secondsBetweenSpawn;
     [SerializeField] private Transform[] _spawnPoints;
 
-    protected bool _coroutineAllowed = true;
+    private bool _coroutineAllowed = true;
     private readonly int _hashAnimRun = Animator.StringToHash("Run");
 
     private void Update()

@@ -6,19 +6,28 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    public event UnityAction<int> ScoreChanged;
+    public static UnityAction<int> ScoreChangeCalled;
+    public static event UnityAction ScoreChanged;
 
     public int Score { get; private set; }
-    public int Level { get; private set; }
-    
-    private void Start()
+
+    private void OnEnable()
     {
-        Level = 1;
+        ScoreChangeCalled += OnScoreChanged;
     }
 
-    public void AddScore(int score)
+    private void OnDisable()
     {
-        Score += score;
-        ScoreChanged?.Invoke(Score);
+        ScoreChangeCalled -= OnScoreChanged;
+    }
+
+    private void OnScoreChanged(int value)
+    {
+        Score += value;
+
+        if (Score < 0)
+            Score = 0;
+
+        ScoreChanged?.Invoke();
     }
 }
