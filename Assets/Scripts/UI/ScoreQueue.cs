@@ -29,7 +29,10 @@ public class ScoreQueue : MonoBehaviour
     {
         if (col.TryGetComponent(out Coin coin))
         {
-            Player.ScoreChangeCalled(_counter.Dequeue());
+            if(_counter.TryDequeue(out int result))
+            {
+                Player.ScoreChangeCalled(result);
+            }
         }
     }
 }

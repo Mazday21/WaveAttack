@@ -28,10 +28,16 @@ public class Enemy : Stickman
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 
-    public override void Hit(int damage)
+    protected override void GetDeath()
     {
-        base.Hit(damage);
-        ScoreQueue.ScoreChangeCalled(Reward);
+        if(Time.timeScale != 1)
+        {
+            Player.ScoreChangeCalled(Reward);
+        }
+        else 
+            ScoreQueue.ScoreChangeCalled(Reward);
+
         Spawner.RayCasting(transform.position);
+        base.GetDeath();
     }
 }

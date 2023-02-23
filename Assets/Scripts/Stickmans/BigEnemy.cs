@@ -15,11 +15,9 @@ public class BigEnemy : Enemy
         StartHealth += _additionalHealthForBig;
     }
 
-    public override void Hit(int damage)
+    protected override void GetDeath()
     {
-        if(IsAlive)
-            _particle.Play();
-
-        base.Hit(damage);
+        _particle.Play();
+        base.GetDeath();
     }
 }

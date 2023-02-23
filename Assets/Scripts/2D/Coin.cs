@@ -9,7 +9,7 @@ public class Coin : MonoBehaviour
     private Vector3 _destination;
     private float _speed = 3;
     private CoinPool _coinPool;
-    private float _offset = 0.5f;
+    private float _offset = 0.1f;
     private float _offsetCamera = 2f;
 
     private void Awake()

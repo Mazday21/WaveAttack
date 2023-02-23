@@ -33,11 +33,7 @@ public abstract class Stickman : MonoBehaviour
 
             if (Health <= 0)
             {
-                Animator.SetBool(_hashAnimDead, true);
-                Collider collider = GetComponent<Collider>();
-                collider.enabled = false;
-                IsAlive = false;
-                Health = StartHealth;
+                GetDeath();
 
                 if (_coroutineAllowed)
                 {
@@ -45,6 +41,15 @@ public abstract class Stickman : MonoBehaviour
                 }
             }
         }
+    }
+
+    protected virtual void GetDeath()
+    {
+        Animator.SetBool(_hashAnimDead, true);
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
+        IsAlive = false;
+        Health = StartHealth;
     }
 
     private IEnumerator DelayVanishing()
