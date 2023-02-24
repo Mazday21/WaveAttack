@@ -34,10 +34,11 @@ public class Enemy : Stickman
         {
             Player.ScoreChangeCalled(Reward);
         }
-        else 
+        else
+        {
             ScoreQueue.ScoreChangeCalled(Reward);
-
-        Spawner.RayCasting(transform.position);
+            Spawner.RayCasting(transform.position);
+        }
         base.GetDeath();
     }
 }

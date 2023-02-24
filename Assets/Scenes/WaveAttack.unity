@@ -1902,8 +1902,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1394689145}
-  - component: {fileID: 1394689148}
-  - component: {fileID: 1394689147}
   - component: {fileID: 1394689146}
   m_Layer: 9
   m_Name: Net
@@ -1920,8 +1918,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394689144}
   m_LocalRotation: {x: 0.0020998418, y: 0.70710367, z: 0.0020998418, w: 0.70710367}
-  m_LocalPosition: {x: -0.18999985, y: 0.24284971, z: 1.9230256}
-  m_LocalScale: {x: 0.30300003, y: 3.3589003, z: 5.7755995}
+  m_LocalPosition: {x: -0.18999985, y: -0.5691, z: 2.1712}
+  m_LocalScale: {x: 0.30300003, y: 2.2791858, z: 5.7755995}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 971575509}
@@ -1938,58 +1936,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1394689147
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394689144}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 21f3a5761c35ea841b112b4d6266f438, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1394689148
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394689144}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Size: {x: 1, y: 0.97093433, z: 0.9999999}
+  m_Center: {x: 0.0000000056275566, y: -0.014532777, z: -4.0604542e-12}
 --- !u!1 &1395836728
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class LineSpawner : StickmanSpawner
 
     private SpawnPoint[] _spawnPoints;
     private int _countEmptyPoints;
-    private Dictionary<float, StickmanLine> _lineStickmans = new Dictionary<float, StickmanLine>();
+    private Dictionary<float, GameObject> _lineStickmans = new Dictionary<float, GameObject>();
 
     public bool AllowSpawn { get; private set; }
 
@@ -34,7 +34,7 @@ public class LineSpawner : StickmanSpawner
             StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
             stickmanLine.SetPosition(point.Transform.position);
             SetStickman(lineStickman, point.Transform.position);
-            _lineStickmans.Add(point.Transform.position.z, stickmanLine);
+            _lineStickmans.Add(point.Transform.position.z, lineStickman);
             var animator = lineStickman.GetComponent<Animator>();
         }
     }
@@ -67,7 +67,7 @@ public class LineSpawner : StickmanSpawner
                 StickmanLine stickmanLine = lineStickman.GetComponent<StickmanLine>();
                 stickmanLine.SetPosition(_spawnPoints[i].Transform.position);
                 SetStickman(lineStickman, _spawnPoints[i].Transform.position);
-                _lineStickmans.Add(_spawnPoints[i].Transform.position.z, stickmanLine);
+                _lineStickmans.Add(_spawnPoints[i].Transform.position.z, lineStickman);
                 _spawnPoints[i].IsEnable = false;
                 _countEmptyPoints--;
 
@@ -82,9 +82,10 @@ public class LineSpawner : StickmanSpawner
     {
         if (_lineStickmans.Count > 0)
         {
-            foreach (KeyValuePair<float, StickmanLine> entry in _lineStickmans)
+            foreach (KeyValuePair<float, GameObject> entry in _lineStickmans)
             {
-                entry.Value.Throw();
+                if(entry.Value.activeSelf)
+                    entry.Value.GetComponent<StickmanLine>().Throw();
             }
         }
     }

@@ -14,7 +14,7 @@ public class Power : MonoBehaviour
     private int _maxPower = 20;
     private float _rotationTime = 10;
     private float _delayToResetValueTime = 0.55f;
-    private float _slowdown = 5;
+    private float _timeScaleValue = 0.2f;
 
     public event UnityAction<int, int> ValueChanged;
     public event UnityAction PowerUp;
@@ -48,6 +48,6 @@ public class Power : MonoBehaviour
         PowerUp?.Invoke();
         Value = _minPower;
         ValueChanged?.Invoke(Value, _maxPower);
-        _timeScale.DilationTime(_slowdown, _rotationTime);
+        _timeScale.DilationTime(_timeScaleValue, _rotationTime);
     }
 }
