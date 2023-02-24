@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,24 @@ using UnityEngine.Events;
 
 public class Level : MonoBehaviour
 {
-    //private int _maxLevel = 6;
+    [SerializeField] private Power _power;
+    private int _maxValue = 10;
 
-    public int Value { get; private set; }
+    public int Value { get; private set; } = 1;
 
-    //public event UnityAction<int> ValueChanged;
+    private void OnPowerUp()
+    {
+        if(Value < _maxValue)
+            Value += 1;
+    }
 
+    private void OnEnable()
+    {
+        _power.PowerUp += OnPowerUp;
+    }
 
+    private void OnDisable()
+    {
+        _power.PowerUp -= OnPowerUp;
+    }
 }

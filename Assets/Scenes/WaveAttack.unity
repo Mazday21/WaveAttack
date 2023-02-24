@@ -1164,9 +1164,10 @@ MonoBehaviour:
   Pool: {fileID: 1500035979}
   CoinSpawner: {fileID: 971575518}
   _enemyPrefab: {fileID: 919132147560683692, guid: 49f935bc4745ab1468f7785d603bbfda, type: 3}
-  _secondsBetweenSpawn: 6
+  _secondsBetweenSpawn: 3
   _spawnPoints:
   - {fileID: 219422381}
+  _level: {fileID: 971575519}
 --- !u!114 &866570872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,7 +1183,7 @@ MonoBehaviour:
   Pool: {fileID: 1576004711}
   CoinSpawner: {fileID: 971575518}
   _enemyPrefab: {fileID: 527202237, guid: 1f0235100b661e944ad85f54e7570030, type: 3}
-  _secondsBetweenSpawn: 5
+  _secondsBetweenSpawn: 1
   _spawnPoints:
   - {fileID: 16224693}
   - {fileID: 1706635198}
@@ -1190,6 +1191,7 @@ MonoBehaviour:
   - {fileID: 1450808733}
   - {fileID: 1881317672}
   - {fileID: 1063498317}
+  _level: {fileID: 971575519}
 --- !u!1 &954607677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1285,7 @@ GameObject:
   - component: {fileID: 971575516}
   - component: {fileID: 971575517}
   - component: {fileID: 971575518}
+  - component: {fileID: 971575519}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1474,6 +1477,19 @@ MonoBehaviour:
     m_Bits: 512
   _coinPrefab: {fileID: 5048096149591804559, guid: 32bd63faea86b5e4c8f37bb95a28e2d6, type: 3}
   _pool: {fileID: 1090875340}
+--- !u!114 &971575519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971575506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7f7f9fd769cbf46996761829ef2c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _power: {fileID: 971575514}
 --- !u!1 &1063498316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,7 +3013,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
